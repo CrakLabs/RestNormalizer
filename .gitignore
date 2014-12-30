@@ -1,3 +1,4 @@
+.idea/
 vendor/
 php/report/
 phpunit.xml
