@@ -5,7 +5,7 @@
 
 namespace Crak\Component\RestNormalizer\Test\Unit;
 
-use Crak\Component\RestNormalizer\SampleClass;
+use Crak\Component\RestNormalizer\Parameter;
 use Crak\Component\RestNormalizer\Test\Mock\SampleAssertsTrait;
 
 /**
@@ -19,7 +19,7 @@ class SampleUnitTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldSayHelloToMe()
     {
-        $obj = new SampleClass();
+        $obj = new Parameter();
 
         $this->assertInstanceOfSampleClass($obj);
         $this->assertSame('Hello, brice!', $obj->sayHello('brice'));

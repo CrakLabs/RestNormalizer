@@ -5,7 +5,7 @@
 
 namespace Crak\Component\RestNormalizer\Test\Mock;
 
-use Crak\Component\RestNormalizer\SampleClass;
+use Crak\Component\RestNormalizer\Parameter;
 
 /**
  * Class SampleUnitTest
@@ -19,6 +19,6 @@ trait SampleAssertsTrait
      */
     private function assertInstanceOfSampleClass($obj)
     {
-        $this->assertInstanceOf(SampleClass::CLASS_NAME, $obj);
+        $this->assertInstanceOf(Parameter::CLASS_NAME, $obj);
     }
 } 
