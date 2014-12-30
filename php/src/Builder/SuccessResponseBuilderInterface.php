@@ -8,7 +8,7 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Crak\Component\RestNormalizer\ParameterInterface;
-use Crak\Component\RestNormalizer\Type\ParameterCollection;
+use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Star\Component\Collection\TypedCollection;
 
 /**
@@ -16,7 +16,7 @@ use Star\Component\Collection\TypedCollection;
  * @package Crak\Component\RestNormalizer\Builder
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-interface SuccessResponseBuilderInterface extends ResponseBuilderInterface
+interface SuccessResponseBuilderInterface
 {
     /**
      * @param ParameterInterface $parameter

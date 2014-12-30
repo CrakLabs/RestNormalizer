@@ -8,14 +8,14 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Crak\Component\RestNormalizer\ErrorInterface;
-use Crak\Component\RestNormalizer\Type\ErrorCollection;
+use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 
 /**
  * Interface ErrorResponseBuilderInterface
  * @package Crak\Component\RestNormalizer\Builder
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-interface ErrorResponseBuilderInterface extends ResponseBuilderInterface
+interface ErrorResponseBuilderInterface
 {
     /**
      * @param ErrorInterface $error

@@ -9,8 +9,8 @@ namespace Crak\Component\RestNormalizer;
 
 use Bcol\Component\Type\NonEmptyString;
 use Bcol\Component\Type\StrictPositiveInteger;
-use Crak\Component\RestNormalizer\Type\ErrorCollection;
-use Crak\Component\RestNormalizer\Type\ParameterCollection;
+use Crak\Component\RestNormalizer\Collection\ErrorCollection;
+use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 
 /**
  * Interface ResponseInterface
@@ -22,10 +22,9 @@ interface ResponseInterface
     const INTERFACE_NAME = __CLASS__;
 
     /**
-     * @return HttpCode code
-     *
+     * @return HttpMethod
      */
-    public function getHttpCode();
+    public function getHttpMethod();
 
     /**
      * @return NonEmptyString

@@ -7,6 +7,8 @@
 
 namespace Crak\Component\RestNormalizer;
 
+use Bcol\Component\Type\StrictPositiveInteger;
+
 /**
  * Class HttpCode
  * @package Crak\Component\RestNormalizer
@@ -55,6 +57,11 @@ class HttpCode
     const CODE_505 = 505;
 
     /**
+     * @var StrictPositiveInteger
+     */
+    private $value;
+
+    /**
      * @param int $code
      * @throws \InvalidArgumentException
      */
@@ -63,6 +70,14 @@ class HttpCode
         if (!in_array($code, self::getAvailableCodes())) {
             throw new \InvalidArgumentException('Invalid HttpCode: ' . $code);
         }
+    }
+
+    /**
+     * @return StrictPositiveInteger
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 
     /**

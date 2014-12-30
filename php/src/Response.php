@@ -10,8 +10,8 @@ namespace Crak\Component\RestNormalizer;
 use Bcol\Component\Type\Boolean;
 use Bcol\Component\Type\NonEmptyString;
 use Bcol\Component\Type\StrictPositiveInteger;
-use Crak\Component\RestNormalizer\Type\ErrorCollection;
-use Crak\Component\RestNormalizer\Type\ParameterCollection;
+use Crak\Component\RestNormalizer\Collection\ErrorCollection;
+use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 
 /**
  * Class Response
@@ -21,9 +21,9 @@ use Crak\Component\RestNormalizer\Type\ParameterCollection;
 class Response implements ResponseInterface
 {
     /**
-     * @var HttpCode
+     * @var HttpMethod
      */
-    private $httpCode;
+    private $httpMethod;
 
     /**
      * @var NonEmptyString
@@ -61,7 +61,7 @@ class Response implements ResponseInterface
     private $data;
 
     /**
-     * @param HttpCode $httpCode
+     * @param HttpMethod $httpMethod
      * @param NonEmptyString $apiVersion
      * @param Boolean $isError
      * @param StrictPositiveInteger $errorCode
@@ -71,7 +71,7 @@ class Response implements ResponseInterface
      * @param DataInterface $data
      */
     function __construct(
-        HttpCode $httpCode,
+        HttpMethod $httpMethod,
         NonEmptyString $apiVersion,
         Boolean $isError,
         StrictPositiveInteger $errorCode,
@@ -81,7 +81,7 @@ class Response implements ResponseInterface
         DataInterface $data
     )
     {
-        $this->httpCode = $httpCode;
+        $this->httpMethod = $httpMethod;
         $this->apiVersion = $apiVersion;
         $this->isError = $isError;
         $this->errorCode = $errorCode;
@@ -92,7 +92,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return NonEmptyString
+     * @inheritdoc
      */
     public function getApiVersion()
     {
@@ -100,7 +100,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return DataInterface
+     * @inheritdoc
      */
     public function getData()
     {
@@ -108,7 +108,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return StrictPositiveInteger
+     * @inheritdoc
      */
     public function getErrorCode()
     {
@@ -116,7 +116,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return NonEmptyString
+     * @inheritdoc
      */
     public function getErrorMessage()
     {
@@ -124,7 +124,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return ErrorCollection
+     * @inheritdoc
      */
     public function getErrors()
     {
@@ -132,15 +132,15 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return HttpCode
+     * @inheritdoc
      */
-    public function getHttpCode()
+    public function getHttpMethod()
     {
-        return $this->httpCode;
+        return $this->httpMethod;
     }
 
     /**
-     * @return boolean
+     * @inheritdoc
      */
     public function isError()
     {
@@ -148,7 +148,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @return ParameterCollection
+     * @inheritdoc
      */
     public function getParameters()
     {

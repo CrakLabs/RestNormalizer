@@ -5,14 +5,14 @@
  * @copyright 2014 Crakmedia
  */
 
-namespace Crak\Component\RestNormalizer\Type;
+namespace Crak\Component\RestNormalizer\Collection;
 
 use Crak\Component\RestNormalizer\ErrorInterface;
 use Star\Component\Collection\TypedCollection;
 
 /**
  * Class ErrorCollection
- * @package Crak\Component\RestNormalizer\Type
+ * @package Crak\Component\RestNormalizer\Collection
  * @author bcolucci <bcolucci@crakmedia.com>
  */
 class ErrorCollection extends TypedCollection
