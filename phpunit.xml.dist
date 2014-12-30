@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        stopOnFailure="false"
+        strict="true"
+        bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite>
+            <directory>php/test/</directory>
+
+            <!-- for manual integration tests: # phpunit php/test/Integration -->
+            <exclude>php/test/Integration/</exclude>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>php/src/</directory>
+            <directory>vendor/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-html" target="./php/report/coverage" charset="UTF-8"/>
+    </logging>
+</phpunit>

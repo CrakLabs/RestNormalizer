@@ -1,0 +1,34 @@
+{
+  "name": "crakmedia/rest-normalizer",
+  "description": "Enter here a short description of the component",
+  "license": "proprietary",
+  "require": {
+    "php": "~5.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Crak\\Component\\RestNormalizer\\": "php/src/",
+      "Crak\\Component\\RestNormalizer\\Mock\\": "php/test/Mock"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Crak\\Component\\RestNormalizer\\Test\\": "php/test/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://apackagist.crakmedia.lan:1280"
+    }
+  ],
+  "authors": [
+    {
+      "name": "bcolucci",
+      "email": "bcolucci@crakmedia.com"
+    }
+  ]
+}

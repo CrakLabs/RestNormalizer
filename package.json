@@ -1,0 +1,27 @@
+{
+  "name": "cr-clickid",
+  "version": "0.1.0",
+  "private": true,
+  "engine": "node >= 0.10.21",
+  "author": "Crakmedia",
+  "readmeFilename": "README.md",
+  "main": "./lib/index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "maintainers": [
+    {
+      "name": "Nicolas Cava",
+      "email": "ncava@crakmedia.com"
+    },
+    {
+      "name": "Brice Colucci",
+      "email": "bcolucci@crakmedia.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.crakmedia.lan:7999/cl/rest-normalizer.git"
+  }
+}
