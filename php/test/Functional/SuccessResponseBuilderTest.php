@@ -62,7 +62,7 @@ class SuccessResponseBuilderTest extends \PHPUnit_Framework_TestCase
         $builder->addItems([$item1, $item2]);
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john","name":"doe"},"data":{"items":[{"id":42,"email":"blochon.rob@yahoo.ca"},{"id":38,"email":"lara.clette@gmail.com"}],"totalItems":2}}',
+            '{"apiVersion":"1.2","method":"GET","params":{},"data":{"items":[{"id":42,"email":"blochon.rob@yahoo.ca"},{"id":38,"email":"lara.clette@gmail.com"}],"totalItems":2}}',
             json_encode($builder->build())
         );
     }
