@@ -83,4 +83,26 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
         );
         return $this->getDataBuilder()->build($response);
     }
+
+    /**
+     * @param DataBuilder $dataBuilder
+     * @param string $apiVersion
+     * @param HttpMethod $httpMethod
+     * @param string $itemsType
+     * @return SuccessResponseBuilder
+     */
+    public static function create(
+        DataBuilder $dataBuilder,
+        $apiVersion,
+        HttpMethod $httpMethod,
+        $itemsType
+    )
+    {
+        return new self(
+            $dataBuilder,
+            new NonEmptyString($apiVersion),
+            $httpMethod,
+            new NonEmptyString($itemsType)
+        );
+    }
 }

@@ -10,11 +10,11 @@ namespace Crak\Component\RestNormalizer\Test\Unit;
 use Crak\Component\RestNormalizer\HttpMethod;
 
 /**
- * Class HtppMethodTest
+ * Class HttpMethodTest
  * @package Crak\Component\RestNormalizer\Test\Functional
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-class HtppMethodTest extends \PHPUnit_Framework_TestCase
+class HttpMethodTest extends \PHPUnit_Framework_TestCase
 {
     public function testShouldHaveGET()
     {

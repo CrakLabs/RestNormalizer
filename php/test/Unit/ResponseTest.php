@@ -8,6 +8,7 @@
 namespace Crak\Component\RestNormalizer\Test\Unit;
 
 use Crak\Component\RestNormalizer\Error;
+use Crak\Component\RestNormalizer\HttpErrorCode;
 use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\Response;
 
@@ -24,7 +25,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             HttpMethod::GET(),
             '1.2',
             true,
-            42,
+            HttpErrorCode::CODE_412(),
             [
                 Error::create('first error', 'Error'),
                 Error::create('second error', 'Error'),

@@ -9,7 +9,6 @@ namespace Crak\Component\RestNormalizer;
 
 use Bcol\Component\Type\Boolean;
 use Bcol\Component\Type\NonEmptyString;
-use Bcol\Component\Type\StrictPositiveInteger;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 
@@ -38,9 +37,9 @@ class Response implements ResponseInterface
     private $isError;
 
     /**
-     * @var StrictPositiveInteger
+     * @var HttpErrorCode
      */
-    private $errorCode;
+    private $httpErrorCode;
 
     /**
      * @var ErrorCollection
@@ -59,9 +58,10 @@ class Response implements ResponseInterface
 
     /**
      * @param HttpMethod $httpMethod
+     * @param HttpCode $httpCode
      * @param NonEmptyString $apiVersion
      * @param Boolean $isError
-     * @param StrictPositiveInteger $errorCode
+     * @param HttpErrorCode $httpErrorCode
      * @param ErrorCollection $errors
      * @param ParameterCollection $parameters
      * @param DataInterface $data
@@ -70,7 +70,7 @@ class Response implements ResponseInterface
         HttpMethod $httpMethod,
         NonEmptyString $apiVersion,
         Boolean $isError,
-        StrictPositiveInteger $errorCode,
+        HttpErrorCode $httpErrorCode,
         ErrorCollection $errors,
         ParameterCollection $parameters,
         DataInterface $data
@@ -79,7 +79,7 @@ class Response implements ResponseInterface
         $this->httpMethod = $httpMethod;
         $this->apiVersion = $apiVersion;
         $this->isError = $isError;
-        $this->errorCode = $errorCode;
+        $this->httpErrorCode = $httpErrorCode;
         $this->errors = $errors;
         $this->parameters = $parameters;
         $this->data = $data;
@@ -99,14 +99,6 @@ class Response implements ResponseInterface
     public function getData()
     {
         return $this->data;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getErrorCode()
-    {
-        return $this->errorCode;
     }
 
     /**
@@ -141,6 +133,14 @@ class Response implements ResponseInterface
     /**
      * @inheritdoc
      */
+    public function getHttpErrorCode()
+    {
+        return $this->httpErrorCode;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function isError()
     {
         return $this->isError;
@@ -158,7 +158,7 @@ class Response implements ResponseInterface
      * @param HttpMethod $httpMethod
      * @param string $apiVersion
      * @param boolean $isError
-     * @param int|StrictPositiveInteger $errorCode = null
+     * @param HttpErrorCode $httpErrorCode
      * @param ErrorInterface[]|ErrorCollection $errors = null
      * @param ParameterInterface[]|ParameterCollection $parameters = null
      * @param DataInterface $data = null
@@ -168,7 +168,7 @@ class Response implements ResponseInterface
         HttpMethod $httpMethod,
         $apiVersion,
         $isError,
-        $errorCode = null,
+        HttpErrorCode $httpErrorCode,
         $errors = null,
         $parameters = null,
         DataInterface $data = null
@@ -190,7 +190,7 @@ class Response implements ResponseInterface
             $httpMethod,
             new NonEmptyString($apiVersion),
             new Boolean($isError),
-            $errorCode ? new StrictPositiveInteger($errorCode) : null,
+            $httpErrorCode,
             $errors,
             $parameters,
             $data ? $data : new Data()

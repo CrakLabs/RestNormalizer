@@ -8,7 +8,6 @@
 namespace Crak\Component\RestNormalizer;
 
 use Bcol\Component\Type\NonEmptyString;
-use Bcol\Component\Type\StrictPositiveInteger;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 
@@ -37,9 +36,9 @@ interface ResponseInterface
     public function isError();
 
     /**
-     * @return StrictPositiveInteger
+     * @return HttpErrorCode
      */
-    public function getErrorCode();
+    public function getHttpErrorCode();
 
     /**
      * @return NonEmptyString

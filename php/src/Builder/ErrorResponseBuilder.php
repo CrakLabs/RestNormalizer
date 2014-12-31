@@ -8,12 +8,12 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
-use Bcol\Component\Type\StrictPositiveInteger;
 use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 use Crak\Component\RestNormalizer\Data;
 use Crak\Component\RestNormalizer\ErrorInterface;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
+use Crak\Component\RestNormalizer\HttpErrorCode;
 use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\Response;
 
@@ -27,9 +27,9 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
     const CLASS_NAME = __CLASS__;
 
     /**
-     * @var StrictPositiveInteger
+     * @var HttpErrorCode
      */
-    private $errorCode;
+    private $httpErrorCode;
 
     /**
      * @var ErrorCollection
@@ -40,18 +40,18 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
      * @param DataBuilder $dataBuilder
      * @param NonEmptyString $apiVersion
      * @param HttpMethod $httpMethod
-     * @param StrictPositiveInteger $errorCode
+     * @param HttpErrorCode $httpErrorCode
      */
     public function __construct(
         DataBuilder $dataBuilder,
         NonEmptyString $apiVersion,
         HttpMethod $httpMethod,
-        StrictPositiveInteger $errorCode
+        HttpErrorCode $httpErrorCode
     )
     {
         parent::__construct($dataBuilder, $apiVersion, $httpMethod);
 
-        $this->errorCode = $errorCode;
+        $this->httpErrorCode = $httpErrorCode;
         $this->errors = new ErrorCollection();
     }
 
@@ -86,7 +86,7 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
             $this->getHttpMethod(),
             $this->getApiVersion(),
             true,
-            $this->errorCode,
+            $this->httpErrorCode,
             $this->errors,
             $this->getParameters(),
             new Data()
@@ -99,19 +99,20 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
      * @param DataBuilder $dataBuilder
      * @param string $apiVersion
      * @param HttpMethod $httpMethod
-     * @param int $errorCode
+     * @param HttpErrorCode $httpErrorCode
      * @return ErrorResponseBuilder
      */
     public static function create(DataBuilder $dataBuilder,
                                   $apiVersion,
                                   HttpMethod $httpMethod,
-                                  $errorCode)
+                                  HttpErrorCode $httpErrorCode
+    )
     {
         return new self(
             $dataBuilder,
             new NonEmptyString($apiVersion),
             $httpMethod,
-            new StrictPositiveInteger($errorCode)
+            $httpErrorCode
         );
     }
 }

@@ -33,7 +33,7 @@ class ErrorDataBuilder implements DataBuilder
         }
 
         $data = $this->buildData($response);
-        $data->code = $response->getErrorCode()->getValue();
+        $data->code = $response->getHttpErrorCode()->getValue();
         $data->message = $response
             ->getErrors()
             ->first()

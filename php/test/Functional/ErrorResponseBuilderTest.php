@@ -11,6 +11,7 @@ use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Crak\Component\RestNormalizer\Error;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
+use Crak\Component\RestNormalizer\HttpErrorCode;
 use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\Parameter;
 
@@ -27,27 +28,27 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ResponseBuilderException::CLASS_NAME,
             'One error at least is required in order to build a restful error'
         );
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
         $builder->build();
     }
 
     public function testShouldGenerateAValidObjectForJSONSerialization()
     {
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
 
         $builder
             ->addParameter(Parameter::create('firstName', 'john'))
             ->addError(Error::create('error message', 'ErrorType'));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john"},"code":42,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john"},"code":500,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
             json_encode($builder->build())
         );
     }
 
     public function testShouldAddParameterCollection()
     {
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
 
         $builder
             ->addParameters(new ParameterCollection(
@@ -59,14 +60,14 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ->addError(Error::create('error message', 'ErrorType'));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john","name":"doe"},"code":42,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john","name":"doe"},"code":500,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
             json_encode($builder->build())
         );
     }
 
     public function testShouldAddErrorCollection()
     {
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
 
         $builder
             ->addErrors(new ErrorCollection(
@@ -77,7 +78,7 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{},"code":42,"message":"e1","errors":[{"message":"e1","reason":"ErrorType"},{"message":"e2","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{},"code":500,"message":"e1","errors":[{"message":"e1","reason":"ErrorType"},{"message":"e2","reason":"ErrorType"}]}',
             json_encode($builder->build())
         );
     }
