@@ -16,19 +16,28 @@ use Crak\Component\RestNormalizer\ResponseInterface;
  * @package Crak\Component\RestNormalizer\Builder\Data
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-class ErrorDataBuilder
+class ErrorDataBuilder implements DataBuilder
 {
+    use ResponseDataBuilder;
+
+    //private
+
+    public function __construct()
+    {
+
+    }
+
     /**
-     * @param ResponseInterface $response
-     * @param \stdClass $data
+     * @inheritdoc
      * @throws ResponseBuilderException
      */
-    public function build(ResponseInterface $response, \stdClass $data)
+    public function build(ResponseInterface $response)
     {
         if ($response->getErrors()->count() <= 0) {
             throw new ResponseBuilderException('One error at least is required in order to build a restful error');
         }
 
+        $data = $this->buildData($response);
         $data->code = $response->getErrorCode()->getValue();
         $data->message = $response->getErrors()->first()->getMessage();
 
@@ -41,5 +50,7 @@ class ErrorDataBuilder
             $errorData->reason = $error->getReason();
             $data->errors[] = $errorData;
         }
+
+        return $data;
     }
 } 

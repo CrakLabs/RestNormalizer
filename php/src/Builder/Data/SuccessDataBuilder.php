@@ -7,8 +7,8 @@
 
 namespace Crak\Component\RestNormalizer\Builder\Data;
 
-use Crak\Component\RestNormalizer\ErrorInterface;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
+use Crak\Component\RestNormalizer\ParameterInterface;
 use Crak\Component\RestNormalizer\ResponseInterface;
 
 /**
@@ -16,15 +16,32 @@ use Crak\Component\RestNormalizer\ResponseInterface;
  * @package Crak\Component\RestNormalizer\Builder\Data
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-class SuccessDataBuilder
+class SuccessDataBuilder implements DataBuilder
 {
+    use ResponseDataBuilder;
+
     /**
-     * @param ResponseInterface $response
-     * @param \stdClass $data
+     * @inheritdoc
      * @throws ResponseBuilderException
      */
-    public function build(ResponseInterface $response, \stdClass $data)
+    public function build(ResponseInterface $response)
     {
+        $data = $this->buildData($response);
 
+        $data->params = new \stdClass();
+        /** @var ParameterInterface $parameter */
+        foreach ($response->getParameters() as $parameter) {
+            $data->params->{$parameter->getId()} = $parameter->getValue();
+        }
+
+        $data->data = new \stdClass();
+
+        $data->data->items = [];
+        foreach ($response->getData()->getItems() as $item) {
+            $data->data->items[] = $item;
+        }
+        $data->data->totalItems = $response->getData()->getTotalItems();
+
+        return $data;
     }
 } 

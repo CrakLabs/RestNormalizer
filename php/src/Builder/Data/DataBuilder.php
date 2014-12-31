@@ -7,27 +7,18 @@
 
 namespace Crak\Component\RestNormalizer\Builder\Data;
 
-use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
 use Crak\Component\RestNormalizer\ResponseInterface;
 
 /**
- * Trait ResponseDataBuilder
+ * Class SuccessDataBuilder
  * @package Crak\Component\RestNormalizer\Builder\Data
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-trait ResponseDataBuilder
+interface DataBuilder
 {
     /**
      * @param ResponseInterface $response
      * @return \stdClass
-     *
-     * @throws ResponseBuilderException
      */
-    public function buildData(ResponseInterface $response)
-    {
-        $data = new \stdClass();
-        $data->apiVersion = $response->getApiVersion()->getValue();
-        $data->method = $response->getHttpMethod()->getValue();
-        return $data;
-    }
+    public function build(ResponseInterface $response);
 } 
