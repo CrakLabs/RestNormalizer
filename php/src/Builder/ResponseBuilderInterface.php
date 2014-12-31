@@ -37,8 +37,7 @@ interface ResponseBuilderInterface
     public function getParameters();
 
     /**
-     * @param ParameterCollection $parameters = null
      * @return \stdClass
      */
-    public function build(ParameterCollection $parameters = null);
+    public function build();
 } 

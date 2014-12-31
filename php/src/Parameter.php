@@ -52,4 +52,14 @@ class Parameter implements ParameterInterface
     {
         return $this->value;
     }
+
+    /**
+     * @param string $id
+     * @param string $value = null
+     * @return Parameter
+     */
+    public static function create($id, $value = null)
+    {
+        return new self(new NonEmptyString($id), new String($value));
+    }
 } 

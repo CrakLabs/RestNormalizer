@@ -12,7 +12,6 @@ use Bcol\Component\Type\NonEmptyString;
 use Bcol\Component\Type\StrictPositiveInteger;
 use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
-use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Crak\Component\RestNormalizer\Data;
 use Crak\Component\RestNormalizer\ErrorInterface;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
@@ -82,19 +81,15 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
      * @inheritdoc
      * @throws ResponseBuilderException
      */
-    public function build(ParameterCollection $parameters = null)
+    public function build()
     {
-        if (!$parameters) {
-            $parameters = new ParameterCollection();
-        }
-
         $response = new Response(
             $this->getHttpMethod(),
             $this->getApiVersion(),
             new Boolean(true),
             $this->errorCode,
             $this->errors,
-            $parameters,
+            $this->getParameters(),
             new Data()
         );
 

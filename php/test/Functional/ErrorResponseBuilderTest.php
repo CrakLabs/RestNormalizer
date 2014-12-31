@@ -10,6 +10,7 @@ use Crak\Component\RestNormalizer\Builder\ErrorResponseBuilder;
 use Crak\Component\RestNormalizer\Error;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
 use Crak\Component\RestNormalizer\HttpMethod;
+use Crak\Component\RestNormalizer\Parameter;
 
 /**
  * Class ErrorResponseBuilderTest
@@ -31,10 +32,13 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
     public function testShouldGenerateAValidObjectForJSONSerialization()
     {
         $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
-        $builder->addError(Error::create('error message', 'ErrorType'));
+
+        $builder
+            ->addParameter(Parameter::create('name', 'john'))
+            ->addError(Error::create('error message', 'ErrorType'));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{},"code":42,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{"name":"john"},"code":42,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
             json_encode($builder->build())
         );
     }
