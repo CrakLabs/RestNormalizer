@@ -7,8 +7,6 @@
 
 namespace Crak\Component\RestNormalizer;
 
-use Bcol\Component\Type\StrictPositiveInteger;
-
 /**
  * Class HttpErrorCode
  * @package Crak\Component\RestNormalizer
@@ -17,6 +15,8 @@ use Bcol\Component\Type\StrictPositiveInteger;
 class HttpErrorCode implements HttpCode
 {
     const CLASS_NAME = __CLASS__;
+
+    const CODE_NONE = 0;
 
     const CODE_400 = 400;
     const CODE_401 = 401;
@@ -42,7 +42,7 @@ class HttpErrorCode implements HttpCode
     const CODE_505 = 505;
 
     /**
-     * @var StrictPositiveInteger
+     * @var int
      */
     private $value;
 
@@ -60,7 +60,7 @@ class HttpErrorCode implements HttpCode
     }
 
     /**
-     * @return StrictPositiveInteger
+     * @inheritdoc
      */
     public function getValue()
     {
@@ -73,6 +73,14 @@ class HttpErrorCode implements HttpCode
     public static function getAvailableCodes()
     {
         return array_reverse((new \ReflectionClass(__CLASS__))->getConstants());
+    }
+
+    /**
+     * @return HttpErrorCode
+     */
+    public static function CODE_NONE()
+    {
+        return new self(self::CODE_NONE);
     }
 
     /**

@@ -35,7 +35,7 @@ class HttpSuccessCode implements HttpCode
     const CODE_305 = 305;
 
     /**
-     * @var StrictPositiveInteger
+     * @var int
      */
     private $value;
 
@@ -53,7 +53,7 @@ class HttpSuccessCode implements HttpCode
     }
 
     /**
-     * @return StrictPositiveInteger
+     * @inheritdoc
      */
     public function getValue()
     {

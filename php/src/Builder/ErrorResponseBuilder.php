@@ -8,7 +8,7 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
-use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
+use Crak\Component\RestNormalizer\Builder\Data\ErrorDataBuilder;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 use Crak\Component\RestNormalizer\Data;
 use Crak\Component\RestNormalizer\ErrorInterface;
@@ -37,13 +37,13 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
     private $errors;
 
     /**
-     * @param DataBuilder $dataBuilder
+     * @param ErrorDataBuilder $dataBuilder
      * @param NonEmptyString $apiVersion
      * @param HttpMethod $httpMethod
      * @param HttpErrorCode $httpErrorCode
      */
     public function __construct(
-        DataBuilder $dataBuilder,
+        ErrorDataBuilder $dataBuilder,
         NonEmptyString $apiVersion,
         HttpMethod $httpMethod,
         HttpErrorCode $httpErrorCode
@@ -96,13 +96,13 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
     }
 
     /**
-     * @param DataBuilder $dataBuilder
+     * @param ErrorDataBuilder $dataBuilder
      * @param string $apiVersion
      * @param HttpMethod $httpMethod
      * @param HttpErrorCode $httpErrorCode
      * @return ErrorResponseBuilder
      */
-    public static function create(DataBuilder $dataBuilder,
+    public static function create(ErrorDataBuilder $dataBuilder,
                                   $apiVersion,
                                   HttpMethod $httpMethod,
                                   HttpErrorCode $httpErrorCode

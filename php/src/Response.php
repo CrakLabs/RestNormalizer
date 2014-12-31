@@ -9,8 +9,10 @@ namespace Crak\Component\RestNormalizer;
 
 use Bcol\Component\Type\Boolean;
 use Bcol\Component\Type\NonEmptyString;
+use Bcol\Component\Type\String;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
+use Crak\Component\RestNormalizer\Util\EmptyHttpErrorCode;
 
 /**
  * Class Response
@@ -111,7 +113,7 @@ class Response implements ResponseInterface
             $firstError = $this->errors->first();
             return $firstError->getMessage();
         }
-        return '';
+        return new String('');
     }
 
     /**
@@ -158,7 +160,7 @@ class Response implements ResponseInterface
      * @param HttpMethod $httpMethod
      * @param string $apiVersion
      * @param boolean $isError
-     * @param HttpErrorCode $httpErrorCode
+     * @param HttpErrorCode $httpErrorCode = null
      * @param ErrorInterface[]|ErrorCollection $errors = null
      * @param ParameterInterface[]|ParameterCollection $parameters = null
      * @param DataInterface $data = null
@@ -168,7 +170,7 @@ class Response implements ResponseInterface
         HttpMethod $httpMethod,
         $apiVersion,
         $isError,
-        HttpErrorCode $httpErrorCode,
+        HttpErrorCode $httpErrorCode = null,
         $errors = null,
         $parameters = null,
         DataInterface $data = null
@@ -184,6 +186,10 @@ class Response implements ResponseInterface
             $parameters = new ParameterCollection();
         } else if (is_array($errors)) {
             $parameters = new ParameterCollection($parameters);
+        }
+
+        if(is_null($httpErrorCode)){
+            $httpErrorCode = new EmptyHttpErrorCode();
         }
 
         return new self(

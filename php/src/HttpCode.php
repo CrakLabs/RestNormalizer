@@ -15,4 +15,9 @@ namespace Crak\Component\RestNormalizer;
 interface HttpCode
 {
     const HTTP_CODE_INTERFACE_NAME = __CLASS__;
+
+    /**
+     * @return
+     */
+    public function getValue();
 }

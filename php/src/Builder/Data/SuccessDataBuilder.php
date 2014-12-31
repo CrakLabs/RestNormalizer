@@ -36,7 +36,7 @@ class SuccessDataBuilder implements DataBuilder
             $data->data->items[] = $item;
         }
 
-        $data->data->totalItems = $response->getData()->getTotalItems();
+        $data->data->totalItems = $response->getData()->getTotalItems()->getValue();
 
         return $data;
     }

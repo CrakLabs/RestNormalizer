@@ -19,14 +19,14 @@ interface SuccessResponseBuilderInterface
     const ERROR_BUILDER_INTERFACE_NAME = __CLASS__;
 
     /**
-     * @param object $serializableObject
+     * @param mixed $serializableObject
      * @return SuccessResponseBuilderInterface
      */
     public function addItem($serializableObject);
 
     /**
-     * @param TypedCollection $serializableObjects
+     * @param $serializableObjects
      * @return SuccessResponseBuilderInterface
      */
-    public function addItems(TypedCollection $serializableObjects);
+    public function addItems(array $serializableObjects);
 } 

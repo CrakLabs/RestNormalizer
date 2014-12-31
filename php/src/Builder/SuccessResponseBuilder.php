@@ -8,7 +8,7 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
-use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
+use Crak\Component\RestNormalizer\Builder\Data\SuccessDataBuilder;
 use Crak\Component\RestNormalizer\Data;
 use Crak\Component\RestNormalizer\DataInterface;
 use Crak\Component\RestNormalizer\HttpMethod;
@@ -30,13 +30,13 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
     private $data;
 
     /**
-     * @param DataBuilder $dataBuilder
+     * @param SuccessDataBuilder $dataBuilder
      * @param NonEmptyString $apiVersion
      * @param HttpMethod $httpMethod
      * @param NonEmptyString $itemsType
      */
     public function __construct(
-        DataBuilder $dataBuilder,
+        SuccessDataBuilder $dataBuilder,
         NonEmptyString $apiVersion,
         HttpMethod $httpMethod,
         NonEmptyString $itemsType
@@ -44,7 +44,7 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
     {
         parent::__construct($dataBuilder, $apiVersion, $httpMethod);
 
-        $this->data = new Data(new TypedCollection($itemsType));
+        $this->data = new Data(new TypedCollection($itemsType->getValue()));
     }
 
     /**
@@ -59,7 +59,7 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
     /**
      * @inheritdoc
      */
-    public function addItems(TypedCollection $serializableObjects)
+    public function addItems(array $serializableObjects)
     {
         foreach ($serializableObjects as $serializableObject) {
             $this->data->getItems()->add($serializableObject);
@@ -85,14 +85,14 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
     }
 
     /**
-     * @param DataBuilder $dataBuilder
+     * @param SuccessDataBuilder $dataBuilder
      * @param string $apiVersion
      * @param HttpMethod $httpMethod
      * @param string $itemsType
      * @return SuccessResponseBuilder
      */
     public static function create(
-        DataBuilder $dataBuilder,
+        SuccessDataBuilder $dataBuilder,
         $apiVersion,
         HttpMethod $httpMethod,
         $itemsType
