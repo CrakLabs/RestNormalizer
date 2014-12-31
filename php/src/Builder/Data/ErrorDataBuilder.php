@@ -34,23 +34,16 @@ class ErrorDataBuilder implements DataBuilder
 
         $data = $this->buildData($response);
         $data->code = $response->getHttpErrorCode()->getValue();
-        $data->message = $response
-            ->getErrors()
-            ->first()
-            ->getMessage()
-            ->getValue();
+        $data->message = $response->getErrors()->first()->getMessage()->getValue();
 
         $data->errors = [];
 
         /** @var ErrorInterface $error */
         foreach ($response->getErrors() as $error) {
             $errorData = new \stdClass();
-            $errorData->message = $error
-                ->getMessage()
-                ->getValue();
-            $errorData->reason = $error
-                ->getReason()
-                ->getValue();
+            $errorData->message = $error->getMessage()->getValue();
+            $errorData->reason = $error->getReason()->getValue();
+            $errorData->location = $error->getLocation()->getValue();
             $data->errors[] = $errorData;
         }
 

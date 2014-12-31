@@ -6,6 +6,7 @@
 namespace Crak\Component\RestNormalizer;
 
 use Bcol\Component\Type\NonEmptyString;
+use Bcol\Component\Type\String;
 
 /**
  * Class Error
@@ -27,13 +28,24 @@ class Error implements ErrorInterface
     private $reason;
 
     /**
+     * @var String
+     */
+    private $location;
+
+    /**
      * @param NonEmptyString $message
      * @param NonEmptyString $reason
+     * @param String $location = null
      */
-    public function __construct(NonEmptyString $message, NonEmptyString $reason)
+    public function __construct(NonEmptyString $message, NonEmptyString $reason, String $location = null)
     {
         $this->message = $message;
         $this->reason = $reason;
+
+        $this->location = $location;
+        if (!$this->location) {
+            $this->location = new String('');
+        }
     }
 
     /**
@@ -50,6 +62,14 @@ class Error implements ErrorInterface
     public function getReason()
     {
         return $this->reason;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getLocation()
+    {
+        return $this->location;
     }
 
     /**

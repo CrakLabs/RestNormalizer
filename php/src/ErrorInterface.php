@@ -27,4 +27,9 @@ interface ErrorInterface
      * @return NonEmptyString
      */
     public function getReason();
+
+    /**
+     * @return String
+     */
+    public function getLocation();
 } 

@@ -41,7 +41,7 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ->addError(Error::create('error message', 'ErrorType'));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john"},"code":500,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john"},"code":500,"message":"error message","errors":[{"message":"error message","reason":"ErrorType","location":""}]}',
             json_encode($builder->build())
         );
     }
@@ -60,7 +60,7 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ->addError(Error::create('error message', 'ErrorType'));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john","name":"doe"},"code":500,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john","name":"doe"},"code":500,"message":"error message","errors":[{"message":"error message","reason":"ErrorType","location":""}]}',
             json_encode($builder->build())
         );
     }
@@ -78,7 +78,7 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{},"code":500,"message":"e1","errors":[{"message":"e1","reason":"ErrorType"},{"message":"e2","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{},"code":500,"message":"e1","errors":[{"message":"e1","reason":"ErrorType","location":""},{"message":"e2","reason":"ErrorType","location":""}]}',
             json_encode($builder->build())
         );
     }
