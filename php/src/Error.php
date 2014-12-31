@@ -75,10 +75,15 @@ class Error implements ErrorInterface
     /**
      * @param string $message
      * @param string $reason
+     * @param string $location = null
      * @return Error
      */
-    public static function create($message, $reason)
+    public static function create($message, $reason, $location = null)
     {
-        return new self(new NonEmptyString($message), new NonEmptyString($reason));
+        if (is_null($location)) {
+            $location = '';
+        }
+
+        return new self(new NonEmptyString($message), new NonEmptyString($reason), new String($location));
     }
 } 

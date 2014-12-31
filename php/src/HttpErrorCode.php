@@ -16,8 +16,6 @@ class HttpErrorCode implements HttpCode
 {
     const CLASS_NAME = __CLASS__;
 
-    const CODE_NONE = 0;
-
     const CODE_400 = 400;
     const CODE_401 = 401;
     const CODE_402 = 402;
@@ -76,11 +74,17 @@ class HttpErrorCode implements HttpCode
     }
 
     /**
-     * @return HttpErrorCode
+     * @param int $code
+     * @return HttpErrorCode|null
      */
-    public static function CODE_NONE()
+    public static function valueOf($code)
     {
-        return new self(self::CODE_NONE);
+        $codes = self::getAvailableCodes();
+        $idx = array_search($code, $codes);
+        if ($idx === false) {
+            return null;
+        }
+        return self::$idx();
     }
 
     /**

@@ -5,9 +5,9 @@
  * @copyright 2014 Crakmedia
  */
 
-namespace Crak\Component\RestNormalizer\Builder;
+namespace Crak\Component\RestNormalizer\Parser;
 
-use Bcol\Component\Type\NonEmptyString;
+use Crak\Component\RestNormalizer\Exception\ResponseParserException;
 use Crak\Component\RestNormalizer\ResponseInterface;
 
 /**
@@ -20,8 +20,9 @@ interface ResponseParserInterface
     const INTERFACE_NAME = __CLASS__;
 
     /**
-     * @param NonEmptyString $json
+     * @param string $json
      * @return ResponseInterface
+     * @throws ResponseParserException
      */
-    public function parse(NonEmptyString $json);
+    public function parse($json);
 } 

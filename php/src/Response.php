@@ -184,11 +184,11 @@ class Response implements ResponseInterface
 
         if (is_null($parameters)) {
             $parameters = new ParameterCollection();
-        } else if (is_array($errors)) {
+        } else if (is_array($parameters)) {
             $parameters = new ParameterCollection($parameters);
         }
 
-        if(is_null($httpErrorCode)){
+        if (is_null($httpErrorCode)) {
             $httpErrorCode = new EmptyHttpErrorCode();
         }
 

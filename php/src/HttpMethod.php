@@ -60,6 +60,20 @@ class HttpMethod
     }
 
     /**
+     * @param string $method
+     * @return HttpMethod|null
+     */
+    public static function valueOf($method)
+    {
+        $methods = self::getAvailableMethods();
+        $idx = array_search($method, $methods);
+        if ($idx === false) {
+            return null;
+        }
+        return self::$idx();
+    }
+
+    /**
      * @return HttpMethod
      */
     public static function GET()
