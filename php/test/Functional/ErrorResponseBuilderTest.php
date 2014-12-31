@@ -7,6 +7,8 @@ namespace Crak\Component\RestNormalizer\Test\Unit;
 
 use Crak\Component\RestNormalizer\Builder\Data\ErrorDataBuilder;
 use Crak\Component\RestNormalizer\Builder\ErrorResponseBuilder;
+use Crak\Component\RestNormalizer\Collection\ErrorCollection;
+use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Crak\Component\RestNormalizer\Error;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
 use Crak\Component\RestNormalizer\HttpMethod;
@@ -34,11 +36,48 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
 
         $builder
-            ->addParameter(Parameter::create('name', 'john'))
+            ->addParameter(Parameter::create('firstName', 'john'))
             ->addError(Error::create('error message', 'ErrorType'));
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{"name":"john"},"code":42,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john"},"code":42,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            json_encode($builder->build())
+        );
+    }
+
+    public function testShouldAddParameterCollection()
+    {
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
+
+        $builder
+            ->addParameters(new ParameterCollection(
+                [
+                    Parameter::create('firstName', 'john'),
+                    Parameter::create('name', 'doe'),
+                ]
+            ))
+            ->addError(Error::create('error message', 'ErrorType'));
+
+        $this->assertSame(
+            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john","name":"doe"},"code":42,"message":"error message","errors":[{"message":"error message","reason":"ErrorType"}]}',
+            json_encode($builder->build())
+        );
+    }
+
+    public function testShouldAddErrorCollection()
+    {
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), 42);
+
+        $builder
+            ->addErrors(new ErrorCollection(
+                [
+                    Error::create('e1', 'ErrorType'),
+                    Error::create('e2', 'ErrorType'),
+                ]
+            ));
+
+        $this->assertSame(
+            '{"apiVersion":"1.2","method":"GET","params":{},"code":42,"message":"e1","errors":[{"message":"e1","reason":"ErrorType"},{"message":"e2","reason":"ErrorType"}]}',
             json_encode($builder->build())
         );
     }
