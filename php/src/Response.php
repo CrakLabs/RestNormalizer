@@ -41,11 +41,6 @@ class Response implements ResponseInterface
     private $errorCode;
 
     /**
-     * @var NonEmptyString
-     */
-    private $errorMessage;
-
-    /**
      * @var ErrorCollection
      */
     private $errors;
@@ -65,7 +60,6 @@ class Response implements ResponseInterface
      * @param NonEmptyString $apiVersion
      * @param Boolean $isError
      * @param StrictPositiveInteger $errorCode
-     * @param NonEmptyString $errorMessage
      * @param ErrorCollection $errors
      * @param ParameterCollection $parameters
      * @param DataInterface $data
@@ -75,7 +69,6 @@ class Response implements ResponseInterface
         NonEmptyString $apiVersion,
         Boolean $isError,
         StrictPositiveInteger $errorCode,
-        NonEmptyString $errorMessage,
         ErrorCollection $errors,
         ParameterCollection $parameters,
         DataInterface $data
@@ -85,7 +78,6 @@ class Response implements ResponseInterface
         $this->apiVersion = $apiVersion;
         $this->isError = $isError;
         $this->errorCode = $errorCode;
-        $this->errorMessage = $errorMessage;
         $this->errors = $errors;
         $this->parameters = $parameters;
         $this->data = $data;
@@ -120,7 +112,12 @@ class Response implements ResponseInterface
      */
     public function getErrorMessage()
     {
-        return $this->errorMessage;
+        if ($this->errors && $this->errors->count() > 0) {
+            /** @var Error $firstError */
+            $firstError = $this->errors->first();
+            return $firstError->getMessage();
+        }
+        return '';
     }
 
     /**

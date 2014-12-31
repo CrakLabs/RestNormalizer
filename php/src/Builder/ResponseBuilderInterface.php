@@ -7,7 +7,7 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
-use Crak\Component\RestNormalizer\ResponseInterface;
+use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 
 /**
  * Interface ResponseBuilderInterface
@@ -17,7 +17,8 @@ use Crak\Component\RestNormalizer\ResponseInterface;
 interface ResponseBuilderInterface
 {
     /**
-     * @return ResponseInterface
+     * @param ParameterCollection $parameters = null
+     * @return \stdClass
      */
-    public function build();
+    public function build(ParameterCollection $parameters = null);
 } 

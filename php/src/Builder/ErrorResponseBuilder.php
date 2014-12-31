@@ -7,12 +7,16 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
+use Bcol\Component\Type\Boolean;
 use Bcol\Component\Type\NonEmptyString;
 use Bcol\Component\Type\StrictPositiveInteger;
+use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
+use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Crak\Component\RestNormalizer\ErrorInterface;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
 use Crak\Component\RestNormalizer\HttpMethod;
+use Crak\Component\RestNormalizer\Response;
 
 /**
  * Class ErrorResponseBuilder
@@ -32,17 +36,19 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
     private $errors;
 
     /**
+     * @param DataBuilder $dataBuilder
      * @param NonEmptyString $apiVersion
      * @param HttpMethod $httpMethod
      * @param StrictPositiveInteger $errorCode
      */
     public function __construct(
+        DataBuilder $dataBuilder,
         NonEmptyString $apiVersion,
         HttpMethod $httpMethod,
         StrictPositiveInteger $errorCode
     )
     {
-        parent::__construct($apiVersion, $httpMethod);
+        parent::__construct($dataBuilder, $apiVersion, $httpMethod);
 
         $this->errorCode = $errorCode;
         $this->errors = new ErrorCollection();
@@ -73,8 +79,17 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
      * @inheritdoc
      * @throws ResponseBuilderException
      */
-    public function build()
+    public function build(ParameterCollection $parameters = null)
     {
-        //TODO
+        $response = new Response(
+            $this->getHttpMethod(),
+            $this->getApiVersion(),
+            new Boolean(true),
+            $this->errorCode,
+            $this->errors,
+            $parameters,
+            null
+        );
+        return $this->getDataBuilder()->build($response);
     }
 }

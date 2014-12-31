@@ -7,9 +7,15 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
+use Bcol\Component\Type\Boolean;
+use Bcol\Component\Type\NonEmptyString;
+use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
-use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
+use Crak\Component\RestNormalizer\Data;
+use Crak\Component\RestNormalizer\DataInterface;
+use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\ParameterInterface;
+use Crak\Component\RestNormalizer\Response;
 use Star\Component\Collection\TypedCollection;
 
 /**
@@ -19,50 +25,89 @@ use Star\Component\Collection\TypedCollection;
  */
 final class SuccessResponseBuilder extends ResponseBuilder implements SuccessResponseBuilderInterface
 {
-    //TODO constructor
+    /**
+     * @var ParameterCollection
+     */
+    private $parameters;
 
     /**
-     * @param ParameterInterface $parameter
-     * @return SuccessResponseBuilderInterface
+     * @var DataInterface
      */
-    public function addParameter(ParameterInterface $parameter)
-    {
-        // TODO: Implement addParameter() method.
-    }
+    private $data;
 
     /**
-     * @param ParameterCollection $parameters
-     * @return SuccessResponseBuilderInterface
+     * @param DataBuilder $dataBuilder
+     * @param NonEmptyString $apiVersion
+     * @param HttpMethod $httpMethod
+     * @param NonEmptyString $itemsType
      */
-    public function addParameters(ParameterCollection $parameters)
+    public function __construct(
+        DataBuilder $dataBuilder,
+        NonEmptyString $apiVersion,
+        HttpMethod $httpMethod,
+        NonEmptyString $itemsType
+    )
     {
-        // TODO: Implement addParameters() method.
-    }
+        parent::__construct($dataBuilder, $apiVersion, $httpMethod);
 
-    /**
-     * @param object $serializableObject
-     * @return SuccessResponseBuilderInterface
-     */
-    public function addItem($serializableObject)
-    {
-        // TODO: Implement addItem() method.
-    }
-
-    /**
-     * @param TypedCollection $serializableObjects
-     * @return SuccessResponseBuilderInterface
-     */
-    public function addItems(TypedCollection $serializableObjects)
-    {
-        // TODO: Implement addItems() method.
+        $this->parameters = new ParameterCollection();
+        $this->data = new Data(new TypedCollection($itemsType));
     }
 
     /**
      * @inheritdoc
-     * @throws ResponseBuilderException
      */
-    public function build()
+    public function addParameter(ParameterInterface $parameter)
     {
-        //TODO
+        $this->parameters->add($parameter);
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addParameters(ParameterCollection $parameters)
+    {
+        foreach ($parameters as $parameter) {
+            $this->parameters->add($parameter);
+        }
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addItem($serializableObject)
+    {
+        $this->data->getItems()->add($serializableObject);
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function addItems(TypedCollection $serializableObjects)
+    {
+        foreach ($serializableObjects as $serializableObject) {
+            $this->data->getItems()->add($serializableObject);
+        }
+        return $this;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function build(ParameterCollection $parameters = null)
+    {
+        $response = new Response(
+            $this->getHttpMethod(),
+            $this->getApiVersion(),
+            new Boolean(false),
+            null,
+            null,
+            $parameters,
+            $this->data
+        );
+        return $this->getDataBuilder()->build($response);
     }
 }
