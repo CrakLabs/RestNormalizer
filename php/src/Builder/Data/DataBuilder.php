@@ -16,6 +16,8 @@ use Crak\Component\RestNormalizer\ResponseInterface;
  */
 interface DataBuilder
 {
+    const BUILDER_INTERFACE_NAME = __CLASS__;
+
     /**
      * @param ResponseInterface $response
      * @return \stdClass

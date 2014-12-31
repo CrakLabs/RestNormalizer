@@ -20,6 +20,8 @@ use Crak\Component\RestNormalizer\Collection\ParameterCollection;
  */
 class Response implements ResponseInterface
 {
+    const CLASS_NAME = __CLASS__;
+
     /**
      * @var HttpMethod
      */

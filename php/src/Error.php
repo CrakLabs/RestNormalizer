@@ -51,4 +51,14 @@ class Error implements ErrorInterface
     {
         return $this->reason;
     }
+
+    /**
+     * @param string $message
+     * @param string $reason
+     * @return Error
+     */
+    public static function create($message, $reason)
+    {
+        return new self(new NonEmptyString($message), new NonEmptyString($reason));
+    }
 } 

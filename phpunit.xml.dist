@@ -22,7 +22,7 @@
             <directory>vendor/</directory>
         </whitelist>
     </filter>
-    <logging>
-        <log type="coverage-html" target="./php/report/coverage" charset="UTF-8"/>
-    </logging>
+    <!--<logging>-->
+        <!--<log type="coverage-html" target="./php/report/coverage" charset="UTF-8"/>-->
+    <!--</logging>-->
 </phpunit>

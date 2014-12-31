@@ -7,8 +7,8 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
-use Crak\Component\RestNormalizer\ErrorInterface;
 use Crak\Component\RestNormalizer\Collection\ErrorCollection;
+use Crak\Component\RestNormalizer\ErrorInterface;
 
 /**
  * Interface ErrorResponseBuilderInterface
@@ -17,6 +17,8 @@ use Crak\Component\RestNormalizer\Collection\ErrorCollection;
  */
 interface ErrorResponseBuilderInterface
 {
+    const ERROR_BUILDER_INTERFACE_NAME = __CLASS__;
+
     /**
      * @param ErrorInterface $error
      * @return ErrorResponseBuilderInterface

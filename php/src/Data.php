@@ -25,8 +25,11 @@ class Data implements DataInterface
     /**
      * @param TypedCollection $items
      */
-    public function __construct(TypedCollection $items)
+    public function __construct(TypedCollection $items = null)
     {
+        if (!$items) {
+            $items = new TypedCollection('\stdClass');
+        }
         $this->items = $items;
     }
 

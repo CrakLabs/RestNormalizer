@@ -8,6 +8,7 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
+use Crak\Component\RestNormalizer\ParameterInterface;
 
 /**
  * Interface ResponseBuilderInterface
@@ -16,6 +17,25 @@ use Crak\Component\RestNormalizer\Collection\ParameterCollection;
  */
 interface ResponseBuilderInterface
 {
+    const INTERFACE_NAME = __CLASS__;
+
+    /**
+     * @param ParameterInterface $parameter
+     * @return SuccessResponseBuilderInterface
+     */
+    public function addParameter(ParameterInterface $parameter);
+
+    /**
+     * @param ParameterCollection $parameters
+     * @return SuccessResponseBuilderInterface
+     */
+    public function addParameters(ParameterCollection $parameters);
+
+    /**
+     * @return ParameterCollection
+     */
+    public function getParameters();
+
     /**
      * @param ParameterCollection $parameters = null
      * @return \stdClass

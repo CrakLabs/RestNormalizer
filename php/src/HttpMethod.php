@@ -16,6 +16,8 @@ use Bcol\Component\Type\NonEmptyString;
  */
 class HttpMethod
 {
+    const CLASS_NAME = __CLASS__;
+
     const GET = 'GET';
     const HEAD = 'HEAD';
     const POST = 'POST';
@@ -37,6 +39,7 @@ class HttpMethod
         if (!in_array($method, self::getAvailableMethods())) {
             throw new \InvalidArgumentException('Invalid HttpMethod: ' . $method);
         }
+        $this->value = $method;
     }
 
     /**

@@ -70,6 +70,7 @@ class HttpCode
         if (!in_array($code, self::getAvailableCodes())) {
             throw new \InvalidArgumentException('Invalid HttpCode: ' . $code);
         }
+        $this->value = $code;
     }
 
     /**

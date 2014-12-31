@@ -14,4 +14,5 @@ namespace Crak\Component\RestNormalizer\Exception;
  */
 class ResponseBuilderException extends \RuntimeException
 {
+    const CLASS_NAME = __CLASS__;
 } 

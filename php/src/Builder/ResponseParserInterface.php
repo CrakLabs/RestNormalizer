@@ -7,7 +7,7 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
-use Bcol\Component\Type\String;
+use Bcol\Component\Type\NonEmptyString;
 use Crak\Component\RestNormalizer\ResponseInterface;
 
 /**
@@ -17,9 +17,11 @@ use Crak\Component\RestNormalizer\ResponseInterface;
  */
 interface ResponseParserInterface
 {
+    const INTERFACE_NAME = __CLASS__;
+
     /**
-     * @param String $json
+     * @param NonEmptyString $json
      * @return ResponseInterface
      */
-    public function parse(String $json);
+    public function parse(NonEmptyString $json);
 } 

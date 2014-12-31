@@ -7,8 +7,6 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
-use Crak\Component\RestNormalizer\ParameterInterface;
-use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Star\Component\Collection\TypedCollection;
 
 /**
@@ -18,17 +16,7 @@ use Star\Component\Collection\TypedCollection;
  */
 interface SuccessResponseBuilderInterface
 {
-    /**
-     * @param ParameterInterface $parameter
-     * @return SuccessResponseBuilderInterface
-     */
-    public function addParameter(ParameterInterface $parameter);
-
-    /**
-     * @param ParameterCollection $parameters
-     * @return SuccessResponseBuilderInterface
-     */
-    public function addParameters(ParameterCollection $parameters);
+    const ERROR_BUILDER_INTERFACE_NAME = __CLASS__;
 
     /**
      * @param object $serializableObject

@@ -18,14 +18,9 @@ use Crak\Component\RestNormalizer\ResponseInterface;
  */
 class ErrorDataBuilder implements DataBuilder
 {
+    const INTERFACE_NAME = __CLASS__;
+
     use ResponseDataBuilder;
-
-    //private
-
-    public function __construct()
-    {
-
-    }
 
     /**
      * @inheritdoc
@@ -39,15 +34,23 @@ class ErrorDataBuilder implements DataBuilder
 
         $data = $this->buildData($response);
         $data->code = $response->getErrorCode()->getValue();
-        $data->message = $response->getErrors()->first()->getMessage();
+        $data->message = $response
+            ->getErrors()
+            ->first()
+            ->getMessage()
+            ->getValue();
 
         $data->errors = [];
 
         /** @var ErrorInterface $error */
         foreach ($response->getErrors() as $error) {
             $errorData = new \stdClass();
-            $errorData->message = $error->getMessage();
-            $errorData->reason = $error->getReason();
+            $errorData->message = $error
+                ->getMessage()
+                ->getValue();
+            $errorData->reason = $error
+                ->getReason()
+                ->getValue();
             $data->errors[] = $errorData;
         }
 

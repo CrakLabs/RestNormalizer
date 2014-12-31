@@ -14,7 +14,6 @@ use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Crak\Component\RestNormalizer\Data;
 use Crak\Component\RestNormalizer\DataInterface;
 use Crak\Component\RestNormalizer\HttpMethod;
-use Crak\Component\RestNormalizer\ParameterInterface;
 use Crak\Component\RestNormalizer\Response;
 use Star\Component\Collection\TypedCollection;
 
@@ -25,10 +24,7 @@ use Star\Component\Collection\TypedCollection;
  */
 final class SuccessResponseBuilder extends ResponseBuilder implements SuccessResponseBuilderInterface
 {
-    /**
-     * @var ParameterCollection
-     */
-    private $parameters;
+    const CLASS_NAME = __CLASS__;
 
     /**
      * @var DataInterface
@@ -50,28 +46,7 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
     {
         parent::__construct($dataBuilder, $apiVersion, $httpMethod);
 
-        $this->parameters = new ParameterCollection();
         $this->data = new Data(new TypedCollection($itemsType));
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addParameter(ParameterInterface $parameter)
-    {
-        $this->parameters->add($parameter);
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addParameters(ParameterCollection $parameters)
-    {
-        foreach ($parameters as $parameter) {
-            $this->parameters->add($parameter);
-        }
-        return $this;
     }
 
     /**
