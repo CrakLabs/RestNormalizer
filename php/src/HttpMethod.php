@@ -33,6 +33,7 @@ class HttpMethod
     /**
      * @param string $method
      * @throws \InvalidArgumentException
+     * @codeCoverageIgnore
      */
     private function __construct($method)
     {

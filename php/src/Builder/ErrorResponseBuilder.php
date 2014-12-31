@@ -7,7 +7,6 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
-use Bcol\Component\Type\Boolean;
 use Bcol\Component\Type\NonEmptyString;
 use Bcol\Component\Type\StrictPositiveInteger;
 use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
@@ -83,10 +82,10 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
      */
     public function build()
     {
-        $response = new Response(
+        $response = Response::create(
             $this->getHttpMethod(),
             $this->getApiVersion(),
-            new Boolean(true),
+            true,
             $this->errorCode,
             $this->errors,
             $this->getParameters(),

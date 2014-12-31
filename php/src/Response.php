@@ -153,4 +153,47 @@ class Response implements ResponseInterface
     {
         return $this->parameters;
     }
+
+    /**
+     * @param HttpMethod $httpMethod
+     * @param string $apiVersion
+     * @param boolean $isError
+     * @param int|StrictPositiveInteger $errorCode = null
+     * @param ErrorInterface[]|ErrorCollection $errors = null
+     * @param ParameterInterface[]|ParameterCollection $parameters = null
+     * @param DataInterface $data = null
+     * @return Response
+     */
+    public static function create(
+        HttpMethod $httpMethod,
+        $apiVersion,
+        $isError,
+        $errorCode = null,
+        $errors = null,
+        $parameters = null,
+        DataInterface $data = null
+    )
+    {
+        if (is_null($errors)) {
+            $errors = new ErrorCollection();
+        } else if (is_array($errors)) {
+            $errors = new ErrorCollection($errors);
+        }
+
+        if (is_null($parameters)) {
+            $parameters = new ParameterCollection();
+        } else if (is_array($errors)) {
+            $parameters = new ParameterCollection($parameters);
+        }
+
+        return new self(
+            $httpMethod,
+            new NonEmptyString($apiVersion),
+            new Boolean($isError),
+            $errorCode ? new StrictPositiveInteger($errorCode) : null,
+            $errors,
+            $parameters,
+            $data ? $data : new Data()
+        );
+    }
 }

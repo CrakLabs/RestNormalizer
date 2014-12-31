@@ -7,7 +7,6 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
-use Bcol\Component\Type\Boolean;
 use Bcol\Component\Type\NonEmptyString;
 use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
 use Crak\Component\RestNormalizer\Data;
@@ -73,10 +72,10 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
      */
     public function build()
     {
-        $response = new Response(
+        $response = Response::create(
             $this->getHttpMethod(),
             $this->getApiVersion(),
-            new Boolean(false),
+            false,
             null,
             null,
             $this->getParameters(),

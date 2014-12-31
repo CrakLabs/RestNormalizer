@@ -64,6 +64,7 @@ class HttpCode
     /**
      * @param int $code
      * @throws \InvalidArgumentException
+     * @codeCoverageIgnore
      */
     private function __construct($code)
     {

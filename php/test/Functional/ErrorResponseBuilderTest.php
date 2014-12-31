@@ -3,7 +3,7 @@
  * Created by bcolucci <bcolucci@crakmedia.com>
  */
 
-namespace Crak\Component\RestNormalizer\Test\Unit;
+namespace Crak\Component\RestNormalizer\Test\Functional;
 
 use Crak\Component\RestNormalizer\Builder\Data\ErrorDataBuilder;
 use Crak\Component\RestNormalizer\Builder\ErrorResponseBuilder;
@@ -16,7 +16,7 @@ use Crak\Component\RestNormalizer\Parameter;
 
 /**
  * Class ErrorResponseBuilderTest
- * @package Crak\Component\RestNormalizer\Test\Unit
+ * @package Crak\Component\RestNormalizer\Test\Functional
  * @author bcolucci <bcolucci@crakmedia.com>
  */
 class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase

@@ -55,10 +55,10 @@ class Parameter implements ParameterInterface
 
     /**
      * @param string $id
-     * @param string $value = null
+     * @param string $value = ''
      * @return Parameter
      */
-    public static function create($id, $value = null)
+    public static function create($id, $value = '')
     {
         return new self(new NonEmptyString($id), new String($value));
     }
