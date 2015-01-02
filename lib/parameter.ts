@@ -3,7 +3,7 @@
  */
 'use strict';
 
-export module rest {
+export module commons {
 
   export class Parameter {
     id : string;

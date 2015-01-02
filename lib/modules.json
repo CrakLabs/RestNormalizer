@@ -1,0 +1,18 @@
+{
+  "error": [
+    "error",
+    "builderror",
+    "parseerror"
+  ],
+  "http": [
+    "httpcode",
+    "httpmethod"
+  ],
+  "commons": [
+    "parameter",
+    "data"
+  ],
+  "builder": [
+    "errorresponsebuilder"
+  ]
+}

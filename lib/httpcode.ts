@@ -3,7 +3,7 @@
  */
 'use strict';
 
-export module rest {
+export module http {
 
   class HttpCode {
     value : number;

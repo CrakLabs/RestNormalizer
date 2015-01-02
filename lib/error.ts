@@ -3,7 +3,7 @@
  */
 'use strict';
 
-export module rest {
+export module error {
 
   export class Error {
     message : string;
