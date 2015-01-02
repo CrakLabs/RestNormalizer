@@ -1,24 +1,34 @@
 /**
  * Created by bcolucci on 1/2/15.
  */
+'use strict';
 
-module RestNormalizer {
+class RestError {
+  message : string;
+  reason : string;
+  location : string;
 
-    export function NewError(message:string, reason:string, location?:string):{message:string; reason:string; location:string
-    } {
-        message = message.trim();
-        if (!message.length) {
-            throw new Error('Error message is required');
-        }
-
-        reason = reason.trim();
-        if (!reason.length) {
-            throw new Error('Error reason is required');
-        }
-
-        location = (location || '').trim();
-
-        return {message: message, reason: reason, location: location};
+  constructor(message : string, reason : string, location? : string) {
+    if (!message.length) {
+      throw 'Error message required';
     }
+    if (!reason.length) {
+      throw 'Error reason required';
+    }
+    this.message = message;
+    this.reason = reason;
+    this.location = location || '';
+  }
 
+  getMessage() : string {
+    return this.message;
+  }
+
+  getReason() : string {
+    return this.reason;
+  }
+
+  getLocation() : string {
+    return this.location;
+  }
 }
