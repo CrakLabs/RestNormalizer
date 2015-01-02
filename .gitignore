@@ -3,3 +3,4 @@ vendor/
 php/report/
 phpunit.xml
 composer.lock
+lib/*.js.map

@@ -7,14 +7,12 @@
 
 namespace Crak\Component\RestNormalizer\Builder;
 
-use Star\Component\Collection\TypedCollection;
-
 /**
  * Interface SuccessResponseBuilderInterface
  * @package Crak\Component\RestNormalizer\Builder
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-interface SuccessResponseBuilderInterface
+interface SuccessResponseBuilderInterface extends ResponseBuilderInterface
 {
     const ERROR_BUILDER_INTERFACE_NAME = __CLASS__;
 

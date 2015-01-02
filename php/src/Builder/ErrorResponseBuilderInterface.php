@@ -15,7 +15,7 @@ use Crak\Component\RestNormalizer\ErrorInterface;
  * @package Crak\Component\RestNormalizer\Builder
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-interface ErrorResponseBuilderInterface
+interface ErrorResponseBuilderInterface extends ResponseBuilderInterface
 {
     const ERROR_BUILDER_INTERFACE_NAME = __CLASS__;
 
