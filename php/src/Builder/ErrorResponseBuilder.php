@@ -9,9 +9,7 @@ namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
 use Crak\Component\RestNormalizer\Builder\Data\ErrorDataBuilder;
-use Crak\Component\RestNormalizer\Collection\ErrorCollection;
 use Crak\Component\RestNormalizer\Data;
-use Crak\Component\RestNormalizer\ErrorInterface;
 use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
 use Crak\Component\RestNormalizer\HttpErrorCode;
 use Crak\Component\RestNormalizer\HttpMethod;
@@ -22,19 +20,11 @@ use Crak\Component\RestNormalizer\Response;
  * @package Crak\Component\RestNormalizer\Builder
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-final class ErrorResponseBuilder extends ResponseBuilder implements ErrorResponseBuilderInterface
+final class ErrorResponseBuilder extends AbstractResponseBuilder implements ErrorResponseBuilderInterface
 {
     const CLASS_NAME = __CLASS__;
 
-    /**
-     * @var HttpErrorCode
-     */
-    private $httpErrorCode;
-
-    /**
-     * @var ErrorCollection
-     */
-    private $errors;
+    use ErrorResponseBuilderTrait;
 
     /**
      * @param ErrorDataBuilder $dataBuilder
@@ -50,30 +40,7 @@ final class ErrorResponseBuilder extends ResponseBuilder implements ErrorRespons
     )
     {
         parent::__construct($dataBuilder, $apiVersion, $httpMethod);
-
-        $this->httpErrorCode = $httpErrorCode;
-        $this->errors = new ErrorCollection();
-    }
-
-    /**
-     * @param ErrorInterface $error
-     * @return ErrorResponseBuilderInterface
-     */
-    public function addError(ErrorInterface $error)
-    {
-        $this->errors->add($error);
-        return $this;
-    }
-
-    /**
-     * @param ErrorCollection $errors
-     * @return ErrorResponseBuilderInterface
-     */
-    public function addErrors(ErrorCollection $errors)
-    {
-        foreach ($errors as $error) {
-            $this->errors->add($error);
-        }
+        $this->initErrorTrait($httpErrorCode);
     }
 
     /**

@@ -35,4 +35,34 @@ export module common {
     }
   }
 
+  export class Error {
+    message : string;
+    reason : string;
+    location : string;
+
+    constructor(message : string, reason : string, location? : string) {
+      if (!message.length) {
+        throw 'Error message required';
+      }
+      if (!reason.length) {
+        throw 'Error reason required';
+      }
+      this.message = message;
+      this.reason = reason;
+      this.location = location || '';
+    }
+
+    getMessage() : string {
+      return this.message;
+    }
+
+    getReason() : string {
+      return this.reason;
+    }
+
+    getLocation() : string {
+      return this.location;
+    }
+  }
+
 }

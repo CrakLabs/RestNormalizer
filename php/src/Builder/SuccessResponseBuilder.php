@@ -9,62 +9,35 @@ namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
 use Crak\Component\RestNormalizer\Builder\Data\SuccessDataBuilder;
-use Crak\Component\RestNormalizer\Data;
-use Crak\Component\RestNormalizer\DataInterface;
 use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\Response;
-use Star\Component\Collection\TypedCollection;
 
 /**
  * Class SuccessResponseBuilder
  * @package Crak\Component\RestNormalizer\Builder
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-final class SuccessResponseBuilder extends ResponseBuilder implements SuccessResponseBuilderInterface
+final class SuccessResponseBuilder extends AbstractResponseBuilder implements SuccessResponseBuilderInterface
 {
     const CLASS_NAME = __CLASS__;
 
-    /**
-     * @var DataInterface
-     */
-    private $data;
+    use SuccessResponseBuilderTrait;
 
     /**
      * @param SuccessDataBuilder $dataBuilder
      * @param NonEmptyString $apiVersion
      * @param HttpMethod $httpMethod
-     * @param NonEmptyString $itemsType
+     * @param NonEmptyString $itemsType = null
      */
     public function __construct(
         SuccessDataBuilder $dataBuilder,
         NonEmptyString $apiVersion,
         HttpMethod $httpMethod,
-        NonEmptyString $itemsType
+        NonEmptyString $itemsType = null
     )
     {
         parent::__construct($dataBuilder, $apiVersion, $httpMethod);
-
-        $this->data = new Data(new TypedCollection($itemsType->getValue()));
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addItem($serializableObject)
-    {
-        $this->data->getItems()->add($serializableObject);
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addItems(array $serializableObjects)
-    {
-        foreach ($serializableObjects as $serializableObject) {
-            $this->data->getItems()->add($serializableObject);
-        }
-        return $this;
+        $this->initSuccessTrait($itemsType);
     }
 
     /**
@@ -95,14 +68,18 @@ final class SuccessResponseBuilder extends ResponseBuilder implements SuccessRes
         SuccessDataBuilder $dataBuilder,
         $apiVersion,
         HttpMethod $httpMethod,
-        $itemsType
+        $itemsType = null
     )
     {
+        if ($itemsType) {
+            $itemsType = new NonEmptyString($itemsType);
+        }
+
         return new self(
             $dataBuilder,
             new NonEmptyString($apiVersion),
             $httpMethod,
-            new NonEmptyString($itemsType)
+            $itemsType
         );
     }
 }

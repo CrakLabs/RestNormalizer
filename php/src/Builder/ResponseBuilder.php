@@ -8,103 +8,129 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
-use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
+use Crak\Component\RestNormalizer\Builder\Data\ErrorDataBuilder;
 use Crak\Component\RestNormalizer\Builder\Data\ResponseDataBuilder;
-use Crak\Component\RestNormalizer\Collection\ParameterCollection;
+use Crak\Component\RestNormalizer\Builder\Data\SuccessDataBuilder;
+use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
+use Crak\Component\RestNormalizer\HttpErrorCode;
 use Crak\Component\RestNormalizer\HttpMethod;
-use Crak\Component\RestNormalizer\ParameterInterface;
+use Crak\Component\RestNormalizer\Response;
 
 /**
  * Class ResponseBuilder
  * @package Crak\Component\RestNormalizer\Builder
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-abstract class ResponseBuilder implements ResponseBuilderInterface
+class ResponseBuilder implements SuccessResponseBuilderInterface, ErrorResponseBuilderInterface
 {
     const RESPONSE_BUILDER_CLASS_NAME = __CLASS__;
 
-    /**
-     * @var DataBuilder
-     */
-    private $dataBuilder;
+    use ResponseBuilderTrait;
+    use SuccessResponseBuilderTrait;
+    use ErrorResponseBuilderTrait;
 
     /**
-     * @var NonEmptyString
-     */
-    private $apiVersion;
-
-    /**
-     * @var HttpMethod
-     */
-    private $httpMethod;
-
-    /**
-     * @var ParameterCollection
-     */
-    private $parameters;
-
-    /**
-     * @param DataBuilder $dataBuilder
      * @param NonEmptyString $apiVersion
      * @param HttpMethod $httpMethod
+     * @param NonEmptyString $itemsType = null
      */
-    public function __construct(DataBuilder $dataBuilder, NonEmptyString $apiVersion, HttpMethod $httpMethod)
+    public function __construct(
+        NonEmptyString $apiVersion,
+        HttpMethod $httpMethod,
+        NonEmptyString $itemsType = null
+    )
     {
-        $this->dataBuilder = $dataBuilder;
-        $this->apiVersion = $apiVersion;
-        $this->httpMethod = $httpMethod;
-        $this->parameters = new ParameterCollection();
+        $this->initBuilder($apiVersion, $httpMethod);
+        $this->initSuccessTrait($itemsType);
+        $this->initErrorTrait();
     }
 
     /**
-     * @inheritdoc
+     * @param HttpErrorCode $httpErrorCode
      */
-    public function addParameter(ParameterInterface $parameter)
+    public function setHttpErrorCode($httpErrorCode)
     {
-        $this->parameters->add($parameter);
-        return $this;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function addParameters(ParameterCollection $parameters)
-    {
-        foreach ($parameters as $parameter) {
-            $this->parameters->add($parameter);
+        if (!$this->httpErrorCode) {
+            $this->httpErrorCode = $httpErrorCode;
         }
-        return $this;
-    }
-
-    /**
-     * @return DataBuilder
-     */
-    public function getDataBuilder()
-    {
-        return $this->dataBuilder;
-    }
-
-    /**
-     * @return NonEmptyString
-     */
-    public function getApiVersion()
-    {
-        return $this->apiVersion;
-    }
-
-    /**
-     * @return HttpMethod
-     */
-    public function getHttpMethod()
-    {
-        return $this->httpMethod;
     }
 
     /**
      * @inheritdoc
+     * @throws ResponseBuilderException
      */
-    public function getParameters()
+    public function build()
     {
-        return $this->parameters;
+        if ($this->isError()) {
+
+            if (!$this->httpErrorCode) {
+                throw new ResponseBuilderException('HttpErrorCode is required for an Error');
+            }
+            if (!count($this->errors)) {
+                throw new ResponseBuilderException('No error found');
+            }
+
+            return $this->buildError();
+        }
+
+        return $this->buildSuccess();
+    }
+
+    /**
+     * @return \stdClass
+     */
+    private function buildError()
+    {
+        return (new ErrorDataBuilder())
+            ->build(
+                Response::create(
+                    $this->getHttpMethod(),
+                    $this->getApiVersion(),
+                    true,
+                    $this->httpErrorCode,
+                    $this->errors,
+                    $this->getParameters()
+                ));
+    }
+
+    /**
+     * @return \stdClass
+     */
+    private function buildSuccess()
+    {
+        return (new SuccessDataBuilder())
+            ->build(
+                Response::create(
+                    $this->getHttpMethod(),
+                    $this->getApiVersion(),
+                    false,
+                    null,
+                    null,
+                    $this->getParameters(),
+                    $this->data
+                ));
+    }
+
+    /**
+     * @return bool
+     */
+    public function isError()
+    {
+        return $this->httpErrorCode || count($this->errors);
+    }
+
+    /**
+     * @param string $apiVersion
+     * @param HttpMethod $httpMethod
+     * @param string $itemsType = null
+     * @return ResponseBuilder
+     */
+    public static function create($apiVersion, HttpMethod $httpMethod, $itemsType = null)
+    {
+        if ($itemsType) {
+            $itemsType = new NonEmptyString($itemsType);
+        }
+
+        return new self(new NonEmptyString($apiVersion), $httpMethod, $itemsType);
     }
 }

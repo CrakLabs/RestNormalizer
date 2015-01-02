@@ -57,21 +57,21 @@ export module http {
 
     static valueOf(value : number) : Code {
       if (value >= 100 && value <= 305) {
-        return new HttpSuccessCode(value);
+        return new SuccessCode(value);
       } else if (value >= 400 && value <= 505) {
-        return new HttpErrorCode(value);
+        return new ErrorCode(value);
       }
-      return new HttpUnknownCode();
+      return new UnknownCode();
     }
   }
 
-  class HttpUnknownCode extends Code {
+  class UnknownCode extends Code {
     constructor() {
       super(0);
     }
   }
 
-  export class HttpSuccessCode extends Code {
+  export class SuccessCode extends Code {
     static CODE_100 : number = 100;
     static CODE_101 : number = 101;
     static CODE_200 : number = 200;
@@ -93,7 +93,7 @@ export module http {
     }
   }
 
-  export class HttpErrorCode extends Code {
+  export class ErrorCode extends Code {
     static CODE_400 : number = 400;
     static CODE_401 : number = 401;
     static CODE_402 : number = 402;

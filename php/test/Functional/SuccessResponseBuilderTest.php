@@ -31,7 +31,7 @@ class SuccessResponseBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldGenerateAValidObjectForJSONSerialization()
     {
-        $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::GET(), '\stdClass');
+        $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::GET());
 
         $item = new \stdClass();
         $item->test1 = 42;
@@ -49,7 +49,7 @@ class SuccessResponseBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAddItemCollection()
     {
-        $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::GET(), '\stdClass');
+        $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::GET());
 
         $item1 = new \stdClass();
         $item1->id = 42;
@@ -69,7 +69,7 @@ class SuccessResponseBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAddParameterCollection()
     {
-        $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::GET(), '\stdClass');
+        $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::GET());
 
         $builder->addParameters(new ParameterCollection(
             [

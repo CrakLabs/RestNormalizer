@@ -14,7 +14,7 @@ namespace Crak\Component\RestNormalizer\Builder;
  */
 interface SuccessResponseBuilderInterface extends ResponseBuilderInterface
 {
-    const ERROR_BUILDER_INTERFACE_NAME = __CLASS__;
+    const SUCCESS_BUILDER_INTERFACE_NAME = __CLASS__;
 
     /**
      * @param mixed $serializableObject
