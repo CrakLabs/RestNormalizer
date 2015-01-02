@@ -3,7 +3,19 @@
  */
 'use strict';
 
-export module commons {
+export module common {
+
+  export class Data {
+    items : any[];
+
+    constructor(items : any[]) {
+      this.items = items;
+    }
+
+    getTotalItems() : number {
+      return this.items.length;
+    }
+  }
 
   export class Parameter {
     id : string;

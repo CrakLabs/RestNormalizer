@@ -5,7 +5,7 @@
 
 export module error {
 
-  export class Error {
+  class Error {
     message : string;
     reason : string;
     location : string;
@@ -32,6 +32,22 @@ export module error {
 
     getLocation() : string {
       return this.location;
+    }
+  }
+
+  export class BuildError {
+    message : string;
+
+    constructor(message : string) {
+      this.message = message;
+    }
+  }
+
+  export class ParseError {
+    message : string;
+
+    constructor(message : string) {
+      this.message = message;
     }
   }
 

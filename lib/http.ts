@@ -5,7 +5,46 @@
 
 export module http {
 
-  class HttpCode {
+  export class Method {
+    static HEAD : string = 'HEAD';
+    static GET : string = 'GET';
+    static POST : string = 'POST';
+    static PUT : string = 'PUT';
+    static PATCH : string = 'PATCH';
+    static DELETE : string = 'DELETE';
+
+    value : string;
+
+    constructor(value : string) {
+      this.value = value;
+    }
+
+    public getValue() : string {
+      return this.value;
+    }
+
+    static getAvailableMethods() : string[] {
+      return [
+        Method.HEAD,
+        Method.GET,
+        Method.POST,
+        Method.PUT,
+        Method.PATCH,
+        Method.DELETE
+      ];
+    }
+
+    static valueOf(value : string) : Method {
+      value = value.trim().toUpperCase();
+      var methods = Method.getAvailableMethods();
+      if (methods.indexOf(value) <= 0) {
+        return null;
+      }
+      return new Method(value);
+    }
+  }
+
+  class Code {
     value : number;
 
     constructor(value : number) {
@@ -16,7 +55,7 @@ export module http {
       return this.value;
     }
 
-    static valueOf(value : number) : HttpCode {
+    static valueOf(value : number) : Code {
       if (value >= 100 && value <= 305) {
         return new HttpSuccessCode(value);
       } else if (value >= 400 && value <= 505) {
@@ -26,13 +65,13 @@ export module http {
     }
   }
 
-  class HttpUnknownCode extends HttpCode {
+  class HttpUnknownCode extends Code {
     constructor() {
       super(0);
     }
   }
 
-  export class HttpSuccessCode extends HttpCode {
+  export class HttpSuccessCode extends Code {
     static CODE_100 : number = 100;
     static CODE_101 : number = 101;
     static CODE_200 : number = 200;
@@ -54,7 +93,7 @@ export module http {
     }
   }
 
-  export class HttpErrorCode extends HttpCode {
+  export class HttpErrorCode extends Code {
     static CODE_400 : number = 400;
     static CODE_401 : number = 401;
     static CODE_402 : number = 402;
