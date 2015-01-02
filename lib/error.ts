@@ -3,32 +3,36 @@
  */
 'use strict';
 
-class RestError {
-  message : string;
-  reason : string;
-  location : string;
+export module rest {
 
-  constructor(message : string, reason : string, location? : string) {
-    if (!message.length) {
-      throw 'Error message required';
+  export class Error {
+    message : string;
+    reason : string;
+    location : string;
+
+    constructor(message : string, reason : string, location? : string) {
+      if (!message.length) {
+        throw 'Error message required';
+      }
+      if (!reason.length) {
+        throw 'Error reason required';
+      }
+      this.message = message;
+      this.reason = reason;
+      this.location = location || '';
     }
-    if (!reason.length) {
-      throw 'Error reason required';
+
+    getMessage() : string {
+      return this.message;
     }
-    this.message = message;
-    this.reason = reason;
-    this.location = location || '';
+
+    getReason() : string {
+      return this.reason;
+    }
+
+    getLocation() : string {
+      return this.location;
+    }
   }
 
-  getMessage() : string {
-    return this.message;
-  }
-
-  getReason() : string {
-    return this.reason;
-  }
-
-  getLocation() : string {
-    return this.location;
-  }
 }
