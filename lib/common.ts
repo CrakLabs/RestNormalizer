@@ -8,8 +8,12 @@ export module common {
   export class Data {
     items : any[];
 
-    constructor(items : any[]) {
-      this.items = items;
+    constructor() {
+      this.items = [];
+    }
+
+    getItems() : any[] {
+      return this.items;
     }
 
     getTotalItems() : number {
