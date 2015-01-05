@@ -18,15 +18,27 @@ var common;
     })();
     common.Data = Data;
     var Parameter = (function () {
-        function Parameter(id, value) {
+        function Parameter(id) {
             this.id = id;
-            this.value = value || null;
+            this.values = [];
+            if (arguments.length > 1) {
+                for (var i = 1; i < arguments.length; i++) {
+                    this.addValue(arguments[i]);
+                }
+            }
         }
+        Parameter.prototype.addValue = function (value) {
+            if (typeof value !== 'string') {
+                value = Object.prototype.toString.apply(value);
+            }
+            this.values.push(value);
+            return this;
+        };
         Parameter.prototype.getId = function () {
             return this.id;
         };
-        Parameter.prototype.getValue = function () {
-            return this.value;
+        Parameter.prototype.getValues = function () {
+            return this.values;
         };
         return Parameter;
     })();

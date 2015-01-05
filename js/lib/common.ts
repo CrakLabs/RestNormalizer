@@ -23,19 +23,33 @@ export module common {
 
   export class Parameter {
     id : string;
-    value : string;
+    values : string[];
 
-    constructor(id : string, value? : string) {
+    constructor(id : string) {
       this.id = id;
-      this.value = value || null;
+
+      this.values = [];
+      if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+          this.addValue(arguments[i]);
+        }
+      }
+    }
+
+    addValue(value : string) : Parameter {
+      if (typeof value !== 'string') {
+        value = Object.prototype.toString.apply(value);
+      }
+      this.values.push(value);
+      return this;
     }
 
     getId() : string {
       return this.id;
     }
 
-    getValue() : string {
-      return this.value;
+    getValues() : string[] {
+      return this.values;
     }
   }
 

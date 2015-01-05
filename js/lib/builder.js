@@ -24,6 +24,9 @@ var builder;
         };
         ResponseBuilder.prototype.addParameters = function (parameters) {
             for (var i in parameters) {
+                if (!parameters.hasOwnProperty(i)) {
+                    continue;
+                }
                 this.parameters.push(parameters[i]);
             }
             return this;
@@ -44,7 +47,17 @@ var builder;
                 params: {}
             };
             for (var i in this.parameters) {
-                data.params[this.parameters[i].getId()] = this.parameters[i].getValue();
+                if (!this.parameters.hasOwnProperty(i)) {
+                    continue;
+                }
+                var plainValue = null, values = this.parameters[i].getValues();
+                if (values.length === 1) {
+                    plainValue = values.shift();
+                }
+                else if (values.length > 1) {
+                    plainValue = values;
+                }
+                data.params[this.parameters[i].getId()] = plainValue;
             }
             return data;
         };

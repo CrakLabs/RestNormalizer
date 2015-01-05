@@ -34,14 +34,17 @@ trait ResponseDataBuilder
         /** @var ParameterInterface $parameter */
         foreach ($response->getParameters() as $parameter) {
             $values = $parameter->getValues();
-            $plainValues = [];
-            if (count($values) === 1) {
+            $nbValues = count($values);
+
+            $plainValues = null;
+            if ($nbValues === 1) {
                 $plainValues = $values->first()->getValue();
-            } else {
+            } else if ($nbValues > 1) {
                 foreach ($values as $value) {
                     $plainValues[] = $value->getValue();
                 }
             }
+
             $data->params->{$parameter->getId()->getValue()} = $plainValues;
         }
 

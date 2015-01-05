@@ -25,13 +25,13 @@ describe('common', function () {
 
   describe('Parameter', function () {
 
-    it('should have an id and and value', function () {
+    it('should have an id and and values', function () {
       var parameter = new common.Parameter('name', 'john');
       assert.strictEqual('name', parameter.getId());
-      assert.strictEqual('john', parameter.getValue());
+      assert.strictEqual('john', parameter.getValues().shift());
 
       parameter = new common.Parameter('name');
-      assert.strictEqual(null, parameter.getValue());
+      assert.deepEqual([], parameter.getValues());
     });
 
   });

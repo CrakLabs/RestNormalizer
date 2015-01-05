@@ -27,6 +27,9 @@ export module builder {
 
     addParameters(parameters : common.common.Parameter[]) : ResponseBuilder {
       for (var i in parameters) {
+        if (!parameters.hasOwnProperty(i)) {
+          continue;
+        }
         this.parameters.push(parameters[i]);
       }
       return this;
@@ -52,7 +55,17 @@ export module builder {
       };
 
       for (var i in this.parameters) {
-        data.params[this.parameters[i].getId()] = this.parameters[i].getValue();
+        if (!this.parameters.hasOwnProperty(i)) {
+          continue;
+        }
+        var plainValue : any = null,
+          values = this.parameters[i].getValues();
+        if (values.length === 1) {
+          plainValue = values.shift();
+        } else if (values.length > 1) {
+          plainValue = values;
+        }
+        data.params[this.parameters[i].getId()] = plainValue;
       }
 
       return data;
