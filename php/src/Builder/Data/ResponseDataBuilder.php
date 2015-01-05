@@ -34,7 +34,10 @@ trait ResponseDataBuilder
         /** @var ParameterInterface $parameter */
         foreach ($response->getParameters() as $parameter) {
             $pValue = $parameter->getValue();
-            $data->params->{$parameter->getId()->getValue()} = $pValue->getValue();
+            if (!is_array($pValue)) {
+                $pValue = $pValue->getValue();
+            }
+            $data->params->{$parameter->getId()->getValue()} = $pValue;
         }
 
         return $data;

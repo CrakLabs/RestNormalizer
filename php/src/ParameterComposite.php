@@ -66,11 +66,11 @@ class ParameterComposite implements ParameterInterface, \Countable
     public function getValue()
     {
         $values = [];
-        foreach($this->values as $value){
+        foreach ($this->values as $value) {
             $values[] = $value->getValue();
         }
 
-        return new String(json_encode($values));
+        return $values;
     }
 
     /**

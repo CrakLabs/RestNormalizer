@@ -30,11 +30,11 @@ class ParameterCompositeTest extends \PHPUnit_Framework_TestCase
             ->addValue(new String('3'))
             ->addValue(new String('4'));
 
-        $this->assertSame('["1","2","3","4"]', $parameter->getValue()->getValue());
+        $this->assertSame('["1","2","3","4"]', json_encode($parameter->getValue()));
 
         $this->assertCount(4, $parameter);
 
         $parameter = ParameterComposite::create('programIds');
-        $this->assertSame('[]', $parameter->getValue()->getValue());
+        $this->assertSame('[]', json_encode($parameter->getValue()));
     }
 } 

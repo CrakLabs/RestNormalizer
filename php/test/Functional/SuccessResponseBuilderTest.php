@@ -10,6 +10,7 @@ use Crak\Component\RestNormalizer\Builder\SuccessResponseBuilder;
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\Parameter;
+use Crak\Component\RestNormalizer\ParameterComposite;
 
 /**
  * Class SuccessResponseBuilderTest
@@ -37,12 +38,14 @@ class SuccessResponseBuilderTest extends \PHPUnit_Framework_TestCase
         $item->test1 = 42;
         $item->test2 = 'yolo';
 
+        $programIds = ParameterComposite::create('programIds', ['1', '2']);
+
         $builder
-            ->addParameter(Parameter::create('firstName', 'john'))
+            ->addParameter($programIds)
             ->addItem($item);
 
         $this->assertSame(
-            '{"apiVersion":"1.2","method":"GET","params":{"firstName":"john"},"data":{"items":[{"test1":42,"test2":"yolo"}],"totalItems":1}}',
+            '{"apiVersion":"1.2","method":"GET","params":{"programIds":["1","2"]},"data":{"items":[{"test1":42,"test2":"yolo"}],"totalItems":1}}',
             json_encode($builder->build())
         );
     }
