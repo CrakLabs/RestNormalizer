@@ -129,8 +129,11 @@ In the case below, the builder will generate an error response.
     $item->firstname = 'john';
 
     $builder = ResponseBuilder::create('1.2', HttpMethod::GET());
+
+    $programIds = ParameterComposite::create('programIds', ['1', '2']);
+
     $builder
-        ->addParameter(Parameter::create('id', '42'))
+        ->addParameter($programIds)
         ->addError(Error::create('error message 1', 'reason1'))
         ->addError(Error::create('error message 2', 'reason2', 'location2'))
         ->setHttpErrorCode(HttpErrorCode::CODE_402());
@@ -139,7 +142,7 @@ In the case below, the builder will generate an error response.
        "apiVersion":"1.2",
        "method":"GET",
        "params":{
-          "id":"42"
+          "programIds":["1","2"]
        },
        "code":402,
        "message":"error message 1",
