@@ -7,8 +7,14 @@ var rest;
 (function (rest) {
   var modules = require('./modules.json');
   for (var ns in  modules) {
-    var lib = require('./' + modules[ns]);
+    if (!modules.hasOwnProperty(ns)) {
+      continue;
+    }
+    var lib = require('./lib/' + modules[ns]);
     for (var libAttr in lib) {
+      if (!lib.hasOwnProperty(libAttr)) {
+        continue;
+      }
       rest[libAttr] = lib[libAttr];
     }
   }

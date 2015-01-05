@@ -27,7 +27,7 @@ export module common {
 
     constructor(id : string, value? : string) {
       this.id = id;
-      this.value = value || '';
+      this.value = value || null;
     }
 
     getId() : string {
@@ -45,15 +45,17 @@ export module common {
     location : string;
 
     constructor(message : string, reason : string, location? : string) {
-      if (!message.length) {
+      this.message = (message || '');
+      if (!this.message.length) {
         throw 'Error message required';
       }
-      if (!reason.length) {
+
+      this.reason = (reason || '');
+      if (!this.reason.length) {
         throw 'Error reason required';
       }
-      this.message = message;
-      this.reason = reason;
-      this.location = location || '';
+
+      this.location = location || null;
     }
 
     getMessage() : string {

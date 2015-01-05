@@ -7,6 +7,7 @@
 
 namespace Crak\Component\RestNormalizer\Test\Functional;
 
+use Crak\Component\RestNormalizer\Exception\ResponseParserException;
 use Crak\Component\RestNormalizer\HttpErrorCode;
 use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\Parser\ResponseParser;
@@ -26,6 +27,15 @@ class ResponseParserTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->parser = new ResponseParser();
+    }
+
+    public function testShouldThrowErrorIfInvalidJSON()
+    {
+        $this->setExpectedException(
+            ResponseParserException::CLASS_NAME,
+            'JSON error (4)'
+        );
+        $this->parser->parse('yolo');
     }
 
     public function testShouldBuildAnErrorResponseFromJSON()

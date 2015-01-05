@@ -20,7 +20,7 @@ var common;
     var Parameter = (function () {
         function Parameter(id, value) {
             this.id = id;
-            this.value = value || '';
+            this.value = value || null;
         }
         Parameter.prototype.getId = function () {
             return this.id;
@@ -33,15 +33,15 @@ var common;
     common.Parameter = Parameter;
     var Error = (function () {
         function Error(message, reason, location) {
-            if (!message.length) {
+            this.message = (message || '');
+            if (!this.message.length) {
                 throw 'Error message required';
             }
-            if (!reason.length) {
+            this.reason = (reason || '');
+            if (!this.reason.length) {
                 throw 'Error reason required';
             }
-            this.message = message;
-            this.reason = reason;
-            this.location = location || '';
+            this.location = location || null;
         }
         Error.prototype.getMessage = function () {
             return this.message;

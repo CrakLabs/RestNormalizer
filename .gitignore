@@ -1,6 +1,8 @@
 .idea/
 vendor/
+node_modules/
 php/report/
+js/report/
 phpunit.xml
 composer.lock
 lib/*.js.map
