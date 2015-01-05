@@ -1,6 +1,6 @@
 {
   "name": "cr-clickid",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "engine": "node >= 0.10.21",
   "author": "Crakmedia",
