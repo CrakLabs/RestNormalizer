@@ -33,11 +33,16 @@ trait ResponseDataBuilder
         $data->params = new \stdClass();
         /** @var ParameterInterface $parameter */
         foreach ($response->getParameters() as $parameter) {
-            $pValue = $parameter->getValue();
-            if (!is_array($pValue)) {
-                $pValue = $pValue->getValue();
+            $values = $parameter->getValues();
+            $plainValues = [];
+            if (count($values) === 1) {
+                $plainValues = $values->first()->getValue();
+            } else {
+                foreach ($values as $value) {
+                    $plainValues[] = $value->getValue();
+                }
             }
-            $data->params->{$parameter->getId()->getValue()} = $pValue;
+            $data->params->{$parameter->getId()->getValue()} = $plainValues;
         }
 
         return $data;

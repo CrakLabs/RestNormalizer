@@ -117,8 +117,11 @@ class ResponseParser implements ResponseParserInterface
         if (!isset($stdObj->params)) {
             throw new ResponseParserException('Parameter array expected');
         }
-        foreach ($stdObj->params as $id => $value) {
-            $params[] = Parameter::create($id, $value);
+        foreach ($stdObj->params as $id => $values) {
+            if (!is_array($values)) {
+                $values = [$values];
+            }
+            $params[] = Parameter::create($id, $values);
         }
         return $params;
     }

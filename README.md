@@ -130,7 +130,7 @@ In the case below, the builder will generate an error response.
 
     $builder = ResponseBuilder::create('1.2', HttpMethod::GET());
 
-    $programIds = ParameterComposite::create('programIds', ['1', '2']);
+    $programIds = Parameter::create('programIds', [1, 2]);
 
     $builder
         ->addParameter($programIds)

@@ -10,7 +10,6 @@ use Crak\Component\RestNormalizer\Builder\SuccessResponseBuilder;
 use Crak\Component\RestNormalizer\Collection\ParameterCollection;
 use Crak\Component\RestNormalizer\HttpMethod;
 use Crak\Component\RestNormalizer\Parameter;
-use Crak\Component\RestNormalizer\ParameterComposite;
 
 /**
  * Class SuccessResponseBuilderTest
@@ -38,7 +37,7 @@ class SuccessResponseBuilderTest extends \PHPUnit_Framework_TestCase
         $item->test1 = 42;
         $item->test2 = 'yolo';
 
-        $programIds = ParameterComposite::create('programIds', ['1', '2']);
+        $programIds = Parameter::create('programIds', [1, 2]);
 
         $builder
             ->addParameter($programIds)

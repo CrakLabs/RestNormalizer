@@ -5,6 +5,7 @@
 
 namespace Crak\Component\RestNormalizer;
 
+use Bcol\Component\Type\Collection\StringCollection;
 use Bcol\Component\Type\NonEmptyString;
 use Bcol\Component\Type\String;
 
@@ -13,7 +14,7 @@ use Bcol\Component\Type\String;
  * @package Crak\Component\RestNormalizer
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-class Parameter implements ParameterInterface
+class Parameter implements ParameterInterface, \Countable
 {
     const CLASS_NAME = __CLASS__;
 
@@ -23,18 +24,32 @@ class Parameter implements ParameterInterface
     private $id;
 
     /**
-     * @var String
+     * @var StringCollection
      */
-    private $value;
+    private $values;
 
     /**
      * @param NonEmptyString $id
-     * @param String $value
+     * @param StringCollection $values = null
      */
-    public function __construct(NonEmptyString $id, String $value)
+    public function __construct(NonEmptyString $id, StringCollection $values = null)
     {
         $this->id = $id;
-        $this->value = $value;
+
+        $this->values = $values;
+        if (is_null($this->values)) {
+            $this->values = new StringCollection();
+        }
+    }
+
+    /**
+     * @param String $value
+     * @return ParameterInterface
+     */
+    public function addValue(String $value)
+    {
+        $this->values->add($value);
+        return $this;
     }
 
     /**
@@ -48,18 +63,36 @@ class Parameter implements ParameterInterface
     /**
      * @inheritdoc
      */
-    public function getValue()
+    public function getValues()
     {
-        return $this->value;
+        return $this->values;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function count()
+    {
+        return count($this->values);
     }
 
     /**
      * @param string $id
-     * @param string $value = ''
+     * @param array|string $values = null
      * @return Parameter
      */
-    public static function create($id, $value = '')
+    public static function create($id, $values = null)
     {
-        return new self(new NonEmptyString($id), new String($value));
+        if (!is_null($values)) {
+            if (!is_array($values)) {
+                $values = [$values];
+            }
+            foreach ($values as &$value) {
+                $value = new String((string)$value);
+            }
+            $values = new StringCollection($values);
+        }
+
+        return new self(new NonEmptyString($id), $values);
     }
-} 
+}

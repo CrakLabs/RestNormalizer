@@ -31,13 +31,13 @@ class ParameterTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("id", $this->parameter->getId()->getValue());
     }
 
-    public function testShouldHaveAValue()
+    public function testShouldHaveValues()
     {
-        $this->assertSame("value", $this->parameter->getValue()->getValue());
+        $this->assertSame("value", $this->parameter->getValues()->first()->getValue());
     }
 
     public function testValueIsOptional()
     {
-        $this->assertSame('', Parameter::create("id")->getValue()->getValue());
+        $this->assertSame([], Parameter::create("id")->getValues()->toArray());
     }
 } 

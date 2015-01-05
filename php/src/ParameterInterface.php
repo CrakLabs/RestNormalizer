@@ -7,7 +7,9 @@
 
 namespace Crak\Component\RestNormalizer;
 
+use Bcol\Component\Type\Collection\StringCollection;
 use Bcol\Component\Type\NonEmptyString;
+use Bcol\Component\Type\String;
 
 /**
  * Interface ParameterInterface
@@ -24,7 +26,13 @@ interface ParameterInterface
     public function getId();
 
     /**
-     * @return String
+     * @param String $value
+     * @return ParameterInterface
      */
-    public function getValue();
+    public function addValue(String $value);
+
+    /**
+     * @return StringCollection
+     */
+    public function getValues();
 } 

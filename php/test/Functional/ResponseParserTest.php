@@ -40,12 +40,12 @@ class ResponseParserTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldBuildAnErrorResponseFromJSON()
     {
-        $response = $this->parser->parse('{"apiVersion":"1.2","method":"GET","params":{"id":"42"},"code":500,"message":"e1","errors":[{"message":"e1","reason":"ErrorType","location":"l1"},{"message":"e2","reason":"ErrorType","location":""}]}');
+        $response = $this->parser->parse('{"apiVersion":"1.2","method":"GET","params":{"ids":["42","36"]},"code":500,"message":"e1","errors":[{"message":"e1","reason":"ErrorType","location":"l1"},{"message":"e2","reason":"ErrorType","location":""}]}');
         $this->assertSame('1.2', $response->getApiVersion()->getValue());
         $this->assertSame(HttpMethod::GET, $response->getHttpMethod()->getValue());
         $this->assertCount(1, $response->getParameters());
-        $this->assertSame('id', $response->getParameters()->first()->getId()->getValue());
-        $this->assertSame('42', $response->getParameters()->first()->getValue()->getValue());
+        $this->assertSame('ids', $response->getParameters()->first()->getId()->getValue());
+        $this->assertSame('42', $response->getParameters()->first()->getValues()->first()->getValue());
         $this->assertSame(HttpErrorCode::CODE_500, $response->getHttpErrorCode()->getValue());
         $this->assertSame('e1', $response->getErrorMessage()->getValue());
         $this->assertCount(2, $response->getErrors());
@@ -61,7 +61,7 @@ class ResponseParserTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(HttpMethod::GET, $response->getHttpMethod()->getValue());
         $this->assertCount(1, $response->getParameters());
         $this->assertSame('firstName', $response->getParameters()->first()->getId()->getValue());
-        $this->assertSame('john', $response->getParameters()->first()->getValue()->getValue());
+        $this->assertSame('john', $response->getParameters()->first()->getValues()->first()->getValue());
         $this->assertCount(2, $response->getData()->getItems());
         $this->assertSame($response->getData()->getItems()->count(), $response->getData()->getTotalItems()->getValue());
         $this->assertSame('{"id":42,"email":"blochon.rob@yahoo.ca"}', json_encode($response->getData()->getItems()->first()));
