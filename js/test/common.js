@@ -4,7 +4,7 @@
 'use strict';
 
 var assert = require('assert'),
-  rest = require(__dirname + '/../index'),
+  rest = require(__dirname + '/../rest'),
   common = rest.common;
 
 describe('common', function () {
@@ -31,7 +31,8 @@ describe('common', function () {
       assert.strictEqual('john', parameter.getValues().shift());
 
       parameter = new common.Parameter('name');
-      assert.deepEqual([], parameter.getValues());
+      parameter.addValue({test: true}); // must serialize none string
+      assert.deepEqual(["[object Object]"], parameter.getValues());
     });
 
   });

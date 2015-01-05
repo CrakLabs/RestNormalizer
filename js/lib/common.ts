@@ -36,8 +36,12 @@ export module common {
       }
     }
 
-    addValue(value : string) : Parameter {
-      if (typeof value !== 'string') {
+    addValue(value : any) : Parameter {
+      if (!value) {
+        return this;
+      }
+
+      if (typeof value == 'object') {
         value = Object.prototype.toString.apply(value);
       }
       this.values.push(value);

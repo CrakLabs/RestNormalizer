@@ -9,7 +9,7 @@ import common = require('./common');
 
 export module builder {
 
-  class ResponseBuilder {
+  export class ResponseBuilder {
     apiVersion : string;
     httpMethod : http.http.Method;
     parameters : common.common.Parameter[];
@@ -72,14 +72,27 @@ export module builder {
     }
   }
 
-  class ErrorResponseBuilder extends ResponseBuilder {
+  export class ErrorResponseBuilder extends ResponseBuilder {
     httpErrorCode : http.http.ErrorCode;
     errors : common.common.Error[];
 
     constructor(apiVersion : string, httpMethod : http.http.Method, httpErrorCode : http.http.ErrorCode) {
       super(apiVersion, httpMethod);
+      if (typeof httpErrorCode !== 'number') {
+        throw new Error('Http error code required (number)');
+      }
       this.httpErrorCode = httpErrorCode;
       this.errors = [];
+    }
+
+    addParameter(parameter : common.common.Parameter) : ErrorResponseBuilder {
+      super.addParameter(parameter);
+      return this;
+    }
+
+    addParameters(parameters : common.common.Parameter[]) : ErrorResponseBuilder {
+      super.addParameters(parameters);
+      return this;
     }
 
     addError(error : common.common.Error) : ErrorResponseBuilder {
@@ -89,6 +102,9 @@ export module builder {
 
     addErrors(errors : common.common.Error[]) : ErrorResponseBuilder {
       for (var i in errors) {
+        if (!errors.hasOwnProperty(i)) {
+          continue;
+        }
         this.errors.push(errors[i]);
       }
       return this;
@@ -101,11 +117,14 @@ export module builder {
 
       var data = super.build();
 
-      data.code = this.httpErrorCode.getValue();
+      data.code = this.httpErrorCode;
       data.message = this.errors[0].getMessage();
 
       data.errors = [];
       for (var i in this.errors) {
+        if (!this.errors.hasOwnProperty(i)) {
+          continue;
+        }
         data.errors.push({
           message: this.errors[i].getMessage(),
           reason: this.errors[i].getReason(),
@@ -117,7 +136,7 @@ export module builder {
     }
   }
 
-  class SuccessResponseBuilder extends ResponseBuilder {
+  export class SuccessResponseBuilder extends ResponseBuilder {
     data : common.common.Data;
     itemsType : string;
 
@@ -127,8 +146,18 @@ export module builder {
       this.itemsType = itemsType;
     }
 
+    addParameter(parameter : common.common.Parameter) : SuccessResponseBuilder {
+      super.addParameter(parameter);
+      return this;
+    }
+
+    addParameters(parameters : common.common.Parameter[]) : SuccessResponseBuilder {
+      super.addParameters(parameters);
+      return this;
+    }
+
     addItem(item : any) : SuccessResponseBuilder {
-      if (String.prototype.toString.apply(item) !== '[object Object]') {
+      if (Object.prototype.toString.apply(item) !== '[object Object]') {
         throw new error.error.BuildError('Item must be an object');
       }
       //TODO type validation
@@ -138,6 +167,9 @@ export module builder {
 
     addItems(items : any[]) : SuccessResponseBuilder {
       for (var i in items) {
+        if (!items.hasOwnProperty(i)) {
+          continue;
+        }
         this.addItem(items[i]);
       }
       return this;

@@ -28,7 +28,10 @@ var common;
             }
         }
         Parameter.prototype.addValue = function (value) {
-            if (typeof value !== 'string') {
+            if (!value) {
+                return this;
+            }
+            if (typeof value == 'object') {
                 value = Object.prototype.toString.apply(value);
             }
             this.values.push(value);

@@ -4,7 +4,7 @@
 'use strict';
 
 var assert = require('assert'),
-  rest = require(__dirname + '/../index'),
+  rest = require(__dirname + '/../rest'),
   http = rest.http;
 
 describe('http', function () {

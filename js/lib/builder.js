@@ -63,19 +63,34 @@ var builder;
         };
         return ResponseBuilder;
     })();
+    builder.ResponseBuilder = ResponseBuilder;
     var ErrorResponseBuilder = (function (_super) {
         __extends(ErrorResponseBuilder, _super);
         function ErrorResponseBuilder(apiVersion, httpMethod, httpErrorCode) {
             _super.call(this, apiVersion, httpMethod);
+            if (typeof httpErrorCode !== 'number') {
+                throw new Error('Http error code required (number)');
+            }
             this.httpErrorCode = httpErrorCode;
             this.errors = [];
         }
+        ErrorResponseBuilder.prototype.addParameter = function (parameter) {
+            _super.prototype.addParameter.call(this, parameter);
+            return this;
+        };
+        ErrorResponseBuilder.prototype.addParameters = function (parameters) {
+            _super.prototype.addParameters.call(this, parameters);
+            return this;
+        };
         ErrorResponseBuilder.prototype.addError = function (error) {
             this.errors.push(error);
             return this;
         };
         ErrorResponseBuilder.prototype.addErrors = function (errors) {
             for (var i in errors) {
+                if (!errors.hasOwnProperty(i)) {
+                    continue;
+                }
                 this.errors.push(errors[i]);
             }
             return this;
@@ -85,10 +100,13 @@ var builder;
                 throw new error.error.BuildError('One error at least is required in order to build a restful error');
             }
             var data = _super.prototype.build.call(this);
-            data.code = this.httpErrorCode.getValue();
+            data.code = this.httpErrorCode;
             data.message = this.errors[0].getMessage();
             data.errors = [];
             for (var i in this.errors) {
+                if (!this.errors.hasOwnProperty(i)) {
+                    continue;
+                }
                 data.errors.push({
                     message: this.errors[i].getMessage(),
                     reason: this.errors[i].getReason(),
@@ -99,6 +117,7 @@ var builder;
         };
         return ErrorResponseBuilder;
     })(ResponseBuilder);
+    builder.ErrorResponseBuilder = ErrorResponseBuilder;
     var SuccessResponseBuilder = (function (_super) {
         __extends(SuccessResponseBuilder, _super);
         function SuccessResponseBuilder(apiVersion, httpMethod, itemsType) {
@@ -107,8 +126,16 @@ var builder;
             this.data = new common.common.Data();
             this.itemsType = itemsType;
         }
+        SuccessResponseBuilder.prototype.addParameter = function (parameter) {
+            _super.prototype.addParameter.call(this, parameter);
+            return this;
+        };
+        SuccessResponseBuilder.prototype.addParameters = function (parameters) {
+            _super.prototype.addParameters.call(this, parameters);
+            return this;
+        };
         SuccessResponseBuilder.prototype.addItem = function (item) {
-            if (String.prototype.toString.apply(item) !== '[object Object]') {
+            if (Object.prototype.toString.apply(item) !== '[object Object]') {
                 throw new error.error.BuildError('Item must be an object');
             }
             //TODO type validation
@@ -117,6 +144,9 @@ var builder;
         };
         SuccessResponseBuilder.prototype.addItems = function (items) {
             for (var i in items) {
+                if (!items.hasOwnProperty(i)) {
+                    continue;
+                }
                 this.addItem(items[i]);
             }
             return this;
@@ -131,5 +161,6 @@ var builder;
         };
         return SuccessResponseBuilder;
     })(ResponseBuilder);
+    builder.SuccessResponseBuilder = SuccessResponseBuilder;
 })(builder = exports.builder || (exports.builder = {}));
 //# sourceMappingURL=builder.js.map
