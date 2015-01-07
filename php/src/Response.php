@@ -34,7 +34,7 @@ class Response implements ResponseInterface
     private $apiVersion;
 
     /**
-     * @var Boolean
+     * @var boolean
      */
     private $isError;
 
@@ -80,7 +80,7 @@ class Response implements ResponseInterface
     {
         $this->httpMethod = $httpMethod;
         $this->apiVersion = $apiVersion;
-        $this->isError = $isError;
+        $this->isError = $isError->getValue();
         $this->httpErrorCode = $httpErrorCode;
         $this->errors = $errors;
         $this->parameters = $parameters;

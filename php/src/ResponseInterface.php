@@ -31,7 +31,7 @@ interface ResponseInterface
     public function getApiVersion();
 
     /**
-     * @return Boolean
+     * @return boolean
      */
     public function isError();
 
