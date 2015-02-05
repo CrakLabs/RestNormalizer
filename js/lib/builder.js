@@ -99,18 +99,25 @@ var builder;
             if (!this.errors.length) {
                 throw new error.error.BuildError('One error at least is required in order to build a restful error');
             }
+            var errorWrapper = function (error) {
+                if (!error.constructor || error.constructor !== common.common.Error) {
+                    error = new common.common.Error(error.message || error, 'UnexpectedError', '?');
+                }
+                return error;
+            };
             var data = _super.prototype.build.call(this);
             data.code = this.httpErrorCode;
-            data.message = this.errors[0].getMessage();
+            data.message = errorWrapper(this.errors[0]).getMessage();
             data.errors = [];
             for (var i in this.errors) {
                 if (!this.errors.hasOwnProperty(i)) {
                     continue;
                 }
+                var err = errorWrapper(this.errors[i]);
                 data.errors.push({
-                    message: this.errors[i].getMessage(),
-                    reason: this.errors[i].getReason(),
-                    location: this.errors[i].getLocation()
+                    message: err.getMessage(),
+                    reason: err.getReason(),
+                    location: err.getLocation()
                 });
             }
             return data;
