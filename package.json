@@ -1,6 +1,6 @@
 {
   "name": "rest-normalizer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
   "engine": "node >= 0.10.21",
   "author": "Crakmedia",
