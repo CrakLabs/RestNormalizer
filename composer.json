@@ -1,7 +1,7 @@
 {
-  "name": "crakmedia/rest-normalizer",
-  "description": "Enter here a short description of the component",
-  "license": "proprietary",
+  "name": "craklabs/rest-normalizer",
+  "description": "Use this component in order to normalize your Restful API I/O",
+  "license": "MIT",
   "require": {
     "php": "~5.4",
     "bcolucci/type": "~1.2"
@@ -21,12 +21,6 @@
       "Crak\\Component\\RestNormalizer\\Test\\": "php/test/"
     }
   },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "http://apackagist.crakmedia.lan:1280"
-    }
-  ],
   "authors": [
     {
       "name": "bcolucci",

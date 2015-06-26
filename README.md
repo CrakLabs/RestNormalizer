@@ -6,13 +6,11 @@ Use this component in order to normalize your Restful API I/O.
 - Use the builder-s to create a valid anonymous object to JSON serialize
 - Use the parser to create an object which will contain your items
 
-See: http://confluence.crakmedia.lan:8090/display/DEV/Restful+Normalizer
-
 ## How to install
 
      "require": {
        ...
-       "crakmedia/rest-normalizer-component": "~1.0"
+       "craklabs/rest-normalizer": "~1.0"
        ...
      }
 
