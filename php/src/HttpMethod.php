@@ -70,13 +70,15 @@ class HttpMethod
         if ($idx === false) {
             return null;
         }
+        $idx = strtolower($idx);
+
         return self::$idx();
     }
 
     /**
      * @return HttpMethod
      */
-    public static function GET()
+    public static function get()
     {
         return new self(self::GET);
     }
@@ -84,7 +86,7 @@ class HttpMethod
     /**
      * @return HttpMethod
      */
-    public static function HEAD()
+    public static function head()
     {
         return new self(self::HEAD);
     }
@@ -92,7 +94,7 @@ class HttpMethod
     /**
      * @return HttpMethod
      */
-    public static function POST()
+    public static function post()
     {
         return new self(self::POST);
     }
@@ -100,7 +102,7 @@ class HttpMethod
     /**
      * @return HttpMethod
      */
-    public static function PUT()
+    public static function put()
     {
         return new self(self::PUT);
     }
@@ -108,7 +110,7 @@ class HttpMethod
     /**
      * @return HttpMethod
      */
-    public static function PATCH()
+    public static function patch()
     {
         return new self(self::PATCH);
     }
@@ -116,7 +118,7 @@ class HttpMethod
     /**
      * @return HttpMethod
      */
-    public static function DELETE()
+    public static function delete()
     {
         return new self(self::DELETE);
     }
