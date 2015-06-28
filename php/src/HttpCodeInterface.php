@@ -8,11 +8,11 @@
 namespace Crak\Component\RestNormalizer;
 
 /**
- * Interface HttpCode
+ * Interface HttpCodeInterface
  * @package Crak\Component\RestNormalizer
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-interface HttpCode
+interface HttpCodeInterface
 {
     const HTTP_CODE_INTERFACE_NAME = __CLASS__;
 
