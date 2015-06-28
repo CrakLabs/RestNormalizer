@@ -9,7 +9,6 @@ namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
 use Crak\Component\RestNormalizer\Data;
-use Crak\Component\RestNormalizer\DataInterface;
 use Star\Component\Collection\TypedCollection;
 
 /**
@@ -20,7 +19,7 @@ use Star\Component\Collection\TypedCollection;
 trait SuccessResponseBuilderTrait
 {
     /**
-     * @var DataInterface
+     * @var Data
      */
     protected $data;
 
