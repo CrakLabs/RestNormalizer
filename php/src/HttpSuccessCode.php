@@ -12,7 +12,7 @@ namespace Crak\Component\RestNormalizer;
  * @package Crak\Component\RestNormalizer
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-class HttpSuccessCode implements HttpCode
+class HttpSuccessCode implements HttpCodeInterface
 {
     const CLASS_NAME = __CLASS__;
 
