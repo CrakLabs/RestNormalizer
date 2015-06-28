@@ -7,8 +7,6 @@
 
 namespace Crak\Component\RestNormalizer;
 
-use Bcol\Component\Type\StrictPositiveInteger;
-
 /**
  * Class HttpSuccessCode
  * @package Crak\Component\RestNormalizer

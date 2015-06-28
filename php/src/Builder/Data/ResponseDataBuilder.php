@@ -7,8 +7,6 @@
 
 namespace Crak\Component\RestNormalizer\Builder\Data;
 
-use Crak\Component\RestNormalizer\Exception\ResponseBuilderException;
-use Crak\Component\RestNormalizer\ParameterInterface;
 use Crak\Component\RestNormalizer\ResponseInterface;
 
 /**
@@ -22,7 +20,7 @@ trait ResponseDataBuilder
      * @param ResponseInterface $response
      * @return \stdClass
      *
-     * @throws ResponseBuilderException
+     * @throws Crak\Component\RestNormalizer\Exception\ResponseBuilderException
      */
     public function buildData(ResponseInterface $response)
     {
@@ -31,7 +29,7 @@ trait ResponseDataBuilder
         $data->method = $response->getHttpMethod()->getValue();
 
         $data->params = new \stdClass();
-        /** @var ParameterInterface $parameter */
+        /** @var Crak\Component\RestNormalizer\ParameterInterface $parameter */
         foreach ($response->getParameters() as $parameter) {
             $values = $parameter->getValues();
             $nbValues = count($values);
