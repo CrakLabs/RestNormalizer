@@ -6,11 +6,15 @@ Use this component in order to normalize your Restful API I/O.
 - Use the builder-s to create a valid anonymous object to JSON serialize
 - Use the parser to create an object which will contain your items
 
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/5998393e-29ea-48f8-8e7e-b19e86daa2db.svg)](https://insight.sensiolabs.com/projects/5998393e-29ea-48f8-8e7e-b19e86daa2db)
+[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%205.4-8892BF.svg)](https://php.net/)
+[![License](https://img.shields.io/packagist/l/craklabs/rest-normalizer.svg)](https://packagist.org/packages/craklabs/rest-normalizer)
+
 ## How to install
 
      "require": {
        ...
-       "craklabs/rest-normalizer": "~1.0"
+       "craklabs/rest-normalizer": "~2.0"
        ...
      }
 
@@ -30,7 +34,7 @@ All response builder can have parameter-s and must have:
 
 ### Example of ErrorResponseBuilder usage
 
-    $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
+    $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::get(), HttpErrorCode::code500());
 
     $builder
         ->addParameter(Parameter::create('firstName', 'john'))
@@ -58,7 +62,7 @@ All response builder can have parameter-s and must have:
 
 ### Example of SuccessResponseBuilder usage
 
-    $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::GET());
+    $builder = SuccessResponseBuilder::create(new SuccessDataBuilder(), '1.2', HttpMethod::get());
 
     $item = new \stdClass();
     $item->test1 = 42;
@@ -95,7 +99,7 @@ In the case below, the builder will generate a success response because no error
     $item = new \stdClass();
     $item->firstname = 'john';
 
-    $builder = ResponseBuilder::create('1.2', HttpMethod::GET());
+    $builder = ResponseBuilder::create('1.2', HttpMethod::get());
     $builder
         ->addParameter(Parameter::create('id', '42'))
         ->addItem($item);
@@ -126,7 +130,7 @@ In the case below, the builder will generate an error response.
     $item = new \stdClass();
     $item->firstname = 'john';
 
-    $builder = ResponseBuilder::create('1.2', HttpMethod::GET());
+    $builder = ResponseBuilder::create('1.2', HttpMethod::get());
 
     $programIds = Parameter::create('programIds', [1, 2]);
 
@@ -134,7 +138,7 @@ In the case below, the builder will generate an error response.
         ->addParameter($programIds)
         ->addError(Error::create('error message 1', 'reason1'))
         ->addError(Error::create('error message 2', 'reason2', 'location2'))
-        ->setHttpErrorCode(HttpErrorCode::CODE_402());
+        ->setHttpErrorCode(HttpErrorCode::code402());
     /* will produce:
     {
        "apiVersion":"1.2",

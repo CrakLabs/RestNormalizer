@@ -12,7 +12,7 @@ namespace Crak\Component\RestNormalizer;
  * @package Crak\Component\RestNormalizer
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-class HttpErrorCode implements HttpCode
+class HttpErrorCode implements HttpCodeInterface
 {
     const CLASS_NAME = __CLASS__;
 
@@ -84,13 +84,16 @@ class HttpErrorCode implements HttpCode
         if ($idx === false) {
             return null;
         }
+        $idx = str_replace('_','', $idx);
+        $idx = strtolower($idx);
+
         return self::$idx();
     }
 
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_400()
+    public static function code400()
     {
         return new self(self::CODE_400);
     }
@@ -98,7 +101,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_401()
+    public static function code401()
     {
         return new self(self::CODE_401);
     }
@@ -106,7 +109,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_402()
+    public static function code402()
     {
         return new self(self::CODE_402);
     }
@@ -114,7 +117,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_403()
+    public static function code403()
     {
         return new self(self::CODE_403);
     }
@@ -122,7 +125,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_404()
+    public static function code404()
     {
         return new self(self::CODE_404);
     }
@@ -130,7 +133,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_405()
+    public static function code405()
     {
         return new self(self::CODE_405);
     }
@@ -138,7 +141,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_406()
+    public static function code406()
     {
         return new self(self::CODE_406);
     }
@@ -146,7 +149,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_407()
+    public static function code407()
     {
         return new self(self::CODE_407);
     }
@@ -154,7 +157,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_408()
+    public static function code408()
     {
         return new self(self::CODE_408);
     }
@@ -162,7 +165,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_409()
+    public static function code409()
     {
         return new self(self::CODE_409);
     }
@@ -170,7 +173,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_410()
+    public static function code410()
     {
         return new self(self::CODE_410);
     }
@@ -178,7 +181,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_411()
+    public static function code411()
     {
         return new self(self::CODE_411);
     }
@@ -186,7 +189,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_412()
+    public static function code412()
     {
         return new self(self::CODE_412);
     }
@@ -194,7 +197,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_413()
+    public static function code413()
     {
         return new self(self::CODE_413);
     }
@@ -202,7 +205,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_414()
+    public static function code414()
     {
         return new self(self::CODE_414);
     }
@@ -210,7 +213,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_415()
+    public static function code415()
     {
         return new self(self::CODE_415);
     }
@@ -218,7 +221,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_500()
+    public static function code500()
     {
         return new self(self::CODE_500);
     }
@@ -226,7 +229,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_501()
+    public static function code501()
     {
         return new self(self::CODE_501);
     }
@@ -234,7 +237,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_502()
+    public static function code502()
     {
         return new self(self::CODE_502);
     }
@@ -242,7 +245,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_503()
+    public static function code503()
     {
         return new self(self::CODE_503);
     }
@@ -250,7 +253,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_504()
+    public static function code504()
     {
         return new self(self::CODE_504);
     }
@@ -258,7 +261,7 @@ class HttpErrorCode implements HttpCode
     /**
      * @return HttpErrorCode
      */
-    public static function CODE_505()
+    public static function code505()
     {
         return new self(self::CODE_505);
     }

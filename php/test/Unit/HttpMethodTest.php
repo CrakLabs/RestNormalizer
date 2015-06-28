@@ -18,31 +18,31 @@ class HttpMethodTest extends \PHPUnit_Framework_TestCase
 {
     public function testShouldHaveGET()
     {
-        $this->assertSame(HttpMethod::GET, HttpMethod::GET()->getValue());
+        $this->assertSame(HttpMethod::GET, HttpMethod::get()->getValue());
     }
 
     public function testShouldHaveHEAD()
     {
-        $this->assertSame(HttpMethod::HEAD, HttpMethod::HEAD()->getValue());
+        $this->assertSame(HttpMethod::HEAD, HttpMethod::head()->getValue());
     }
 
     public function testShouldHavePOST()
     {
-        $this->assertSame(HttpMethod::POST, HttpMethod::POST()->getValue());
+        $this->assertSame(HttpMethod::POST, HttpMethod::post()->getValue());
     }
 
     public function testShouldHavePUT()
     {
-        $this->assertSame(HttpMethod::PUT, HttpMethod::PUT()->getValue());
+        $this->assertSame(HttpMethod::PUT, HttpMethod::put()->getValue());
     }
 
     public function testShouldHavePATCH()
     {
-        $this->assertSame(HttpMethod::PATCH, HttpMethod::PATCH()->getValue());
+        $this->assertSame(HttpMethod::PATCH, HttpMethod::patch()->getValue());
     }
 
     public function testShouldHaveDELETE()
     {
-        $this->assertSame(HttpMethod::DELETE, HttpMethod::DELETE()->getValue());
+        $this->assertSame(HttpMethod::DELETE, HttpMethod::delete()->getValue());
     }
 } 

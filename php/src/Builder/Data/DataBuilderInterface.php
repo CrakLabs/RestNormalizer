@@ -10,11 +10,10 @@ namespace Crak\Component\RestNormalizer\Builder\Data;
 use Crak\Component\RestNormalizer\ResponseInterface;
 
 /**
- * Class SuccessDataBuilder
  * @package Crak\Component\RestNormalizer\Builder\Data
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-interface DataBuilder
+interface DataBuilderInterface
 {
     const BUILDER_INTERFACE_NAME = __CLASS__;
 

@@ -30,7 +30,7 @@ class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($builder->isError());
 
         $builder = $this->getBuilder();
-        $builder->setHttpErrorCode(HttpErrorCode::CODE_400());
+        $builder->setHttpErrorCode(HttpErrorCode::code400());
         $this->assertTrue($builder->isError());
     }
 
@@ -54,7 +54,7 @@ class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
         );
 
         $builder = $this->getBuilder();
-        $builder->setHttpErrorCode(HttpErrorCode::CODE_400());
+        $builder->setHttpErrorCode(HttpErrorCode::code400());
         $builder->build();
     }
 
@@ -85,7 +85,7 @@ class ResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ->addItem($item) // just to be sur it'll not appear into the JSON string
             ->addError(Error::create('error message 1', 'reason1'))
             ->addError(Error::create('error message 2', 'reason2', 'location2'))
-            ->setHttpErrorCode(HttpErrorCode::CODE_402());
+            ->setHttpErrorCode(HttpErrorCode::code402());
 
         $this->assertSame(
             '{"apiVersion":"1.2","method":"GET","params":{"id":"42"},"code":402,"message":"error message 1","errors":[{"message":"error message 1","reason":"reason1","location":""},{"message":"error message 2","reason":"reason2","location":"location2"}]}',

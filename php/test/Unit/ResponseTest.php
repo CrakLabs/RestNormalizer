@@ -25,7 +25,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             HttpMethod::GET(),
             '1.2',
             true,
-            HttpErrorCode::CODE_412(),
+            HttpErrorCode::code412(),
             [
                 Error::create('first error', 'Error'),
                 Error::create('second error', 'Error'),
@@ -37,7 +37,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             HttpMethod::GET(),
             '1.2',
             true,
-            HttpErrorCode::CODE_412()
+            HttpErrorCode::code412()
         );
         $this->assertSame('', $response->getErrorMessage()->getValue());
     }
