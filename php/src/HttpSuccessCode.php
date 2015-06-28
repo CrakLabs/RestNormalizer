@@ -69,7 +69,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_100()
+    public static function code100()
     {
         return new self(self::CODE_100);
     }
@@ -77,7 +77,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_101()
+    public static function code101()
     {
         return new self(self::CODE_101);
     }
@@ -85,7 +85,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_200()
+    public static function code200()
     {
         return new self(self::CODE_200);
     }
@@ -93,7 +93,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_201()
+    public static function code201()
     {
         return new self(self::CODE_201);
     }
@@ -101,7 +101,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_202()
+    public static function code202()
     {
         return new self(self::CODE_202);
     }
@@ -109,7 +109,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_203()
+    public static function code203()
     {
         return new self(self::CODE_203);
     }
@@ -117,7 +117,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_204()
+    public static function code204()
     {
         return new self(self::CODE_204);
     }
@@ -125,7 +125,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_205()
+    public static function code205()
     {
         return new self(self::CODE_205);
     }
@@ -133,7 +133,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_206()
+    public static function code206()
     {
         return new self(self::CODE_206);
     }
@@ -141,7 +141,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_300()
+    public static function code300()
     {
         return new self(self::CODE_300);
     }
@@ -149,7 +149,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_301()
+    public static function code301()
     {
         return new self(self::CODE_301);
     }
@@ -157,7 +157,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_302()
+    public static function code302()
     {
         return new self(self::CODE_302);
     }
@@ -165,7 +165,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_303()
+    public static function code303()
     {
         return new self(self::CODE_303);
     }
@@ -173,7 +173,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_304()
+    public static function code304()
     {
         return new self(self::CODE_304);
     }
@@ -181,7 +181,7 @@ class HttpSuccessCode implements HttpCodeInterface
     /**
      * @return HttpSuccessCode
      */
-    public static function CODE_305()
+    public static function code305()
     {
         return new self(self::CODE_305);
     }

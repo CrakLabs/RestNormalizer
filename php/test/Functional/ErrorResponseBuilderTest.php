@@ -28,13 +28,13 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
             ResponseBuilderException::CLASS_NAME,
             'One error at least is required in order to build a restful error'
         );
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::code500());
         $builder->build();
     }
 
     public function testShouldGenerateAValidObjectForJSONSerialization()
     {
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::code500());
 
         $builder
             ->addParameter(Parameter::create('firstName', 'john'))
@@ -48,7 +48,7 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAddParameterCollection()
     {
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::code500());
 
         $builder
             ->addParameters(new ParameterCollection(
@@ -67,7 +67,7 @@ class ErrorResponseBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testShouldAddErrorCollection()
     {
-        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::CODE_500());
+        $builder = ErrorResponseBuilder::create(new ErrorDataBuilder(), '1.2', HttpMethod::GET(), HttpErrorCode::code500());
 
         $builder
             ->addErrors(new ErrorCollection(
