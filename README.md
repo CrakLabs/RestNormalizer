@@ -6,11 +6,15 @@ Use this component in order to normalize your Restful API I/O.
 - Use the builder-s to create a valid anonymous object to JSON serialize
 - Use the parser to create an object which will contain your items
 
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/5998393e-29ea-48f8-8e7e-b19e86daa2db.svg)](https://insight.sensiolabs.com/projects/5998393e-29ea-48f8-8e7e-b19e86daa2db)
+[![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%205.4-8892BF.svg)](https://php.net/)
+[![License](https://img.shields.io/packagist/l/craklabs/rest-normalizer.svg)](https://packagist.org/packages/craklabs/rest-normalizer)
+
 ## How to install
 
      "require": {
        ...
-       "craklabs/rest-normalizer": "~1.0"
+       "craklabs/rest-normalizer": "~2.0"
        ...
      }
 
