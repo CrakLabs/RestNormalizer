@@ -8,7 +8,7 @@
 namespace Crak\Component\RestNormalizer\Builder;
 
 use Bcol\Component\Type\NonEmptyString;
-use Crak\Component\RestNormalizer\Builder\Data\DataBuilder;
+use Crak\Component\RestNormalizer\Builder\Data\DataBuilderInterface;
 use Crak\Component\RestNormalizer\Builder\Data\ResponseDataBuilder;
 use Crak\Component\RestNormalizer\HttpMethod;
 
@@ -24,23 +24,23 @@ abstract class AbstractResponseBuilder implements ResponseBuilderInterface
     use ResponseBuilderTrait;
 
     /**
-     * @var DataBuilder
+     * @var DataBuilderInterface
      */
     private $dataBuilder;
 
     /**
-     * @param DataBuilder $dataBuilder
+     * @param DataBuilderInterface $dataBuilder
      * @param NonEmptyString $apiVersion
      * @param HttpMethod $httpMethod
      */
-    public function __construct(DataBuilder $dataBuilder, NonEmptyString $apiVersion, HttpMethod $httpMethod)
+    public function __construct(DataBuilderInterface $dataBuilder, NonEmptyString $apiVersion, HttpMethod $httpMethod)
     {
         $this->initBuilder($apiVersion, $httpMethod);
         $this->dataBuilder = $dataBuilder;
     }
 
     /**
-     * @return DataBuilder
+     * @return DataBuilderInterface
      */
     public function getDataBuilder()
     {

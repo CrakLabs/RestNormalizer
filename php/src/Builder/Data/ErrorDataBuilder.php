@@ -16,7 +16,7 @@ use Crak\Component\RestNormalizer\ResponseInterface;
  * @package Crak\Component\RestNormalizer\Builder\Data
  * @author bcolucci <bcolucci@crakmedia.com>
  */
-class ErrorDataBuilder implements DataBuilder
+class ErrorDataBuilder implements DataBuilderInterface
 {
     const INTERFACE_NAME = __CLASS__;
 
