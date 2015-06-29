@@ -9,7 +9,7 @@ Use this component in order to normalize your Restful API I/O.
 [![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%205.4-8892BF.svg)](https://php.net/)
 [![Build Status](https://travis-ci.org/CrakLabs/rest-normalizer.svg)](https://travis-ci.org/CrakLabs/rest-normalizer)
 [![Coverage Status](https://coveralls.io/repos/CrakLabs/rest-normalizer/badge.svg?branch=master)](https://coveralls.io/r/CrakLabs/rest-normalizer?branch=master)
-[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/5998393e-29ea-48f8-8e7e-b19e86daa2db.svg)](https://insight.sensiolabs.com/projects/5998393e-29ea-48f8-8e7e-b19e86daa2db)
+[![SensioLabs Insight](https://img.shields.io/sensiolabs/i/9cf9ecbb-5c2e-4e41-901e-7119de606150.svg)](https://insight.sensiolabs.com/projects/9cf9ecbb-5c2e-4e41-901e-7119de606150)
 [![License](https://img.shields.io/packagist/l/craklabs/rest-normalizer.svg)](https://packagist.org/packages/craklabs/rest-normalizer)
 
 ## How to install
