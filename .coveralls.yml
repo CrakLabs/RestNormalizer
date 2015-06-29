@@ -1,0 +1,2 @@
+src_dir: php/src
+coverage_clover: build/logs/clover.xml
